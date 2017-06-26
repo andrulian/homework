@@ -1,14 +1,17 @@
 package hw01.isFibonacci;
 
 public class isFibonacciTest {
-
     public static void main(String[] args) {
-        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(5), 5));
-        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(10), 55));
-        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(16), 987));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(5), true));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(8), true));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(13), true));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(21), true));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(34), true));
 
-        System.out.println(SimpleUnit.assertsNotEqual(IsFibonacci.isFibonacci(1), 0));
-        System.out.println(SimpleUnit.assertsNotEqual(IsFibonacci.isFibonacci(6), 87));
-        System.out.println(SimpleUnit.assertsNotEqual(IsFibonacci.isFibonacci(9), 23));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(19), false));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(14), false));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(22), false));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(6), false));
+        System.out.println(SimpleUnit.assertsEqual(IsFibonacci.isFibonacci(35), false));
     }
 }
