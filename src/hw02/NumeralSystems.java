@@ -6,14 +6,26 @@ import java.util.Scanner;
 public class NumeralSystems {
 
     private static int number, radix;
-//    int number, radix;
 
     public static void main(String[] args) {
         receiveInput();
-        intoBinaryString();
-        intoHexString();
-        intoOctalString();
-        intoCustomString();
+        numeralSystemSelector();
+    }
+
+    public static void numeralSystemSelector() {
+        switch (radix) {
+            case 2:
+                System.out.println(intoBinaryOrOctalNs());
+                break;
+            case 8:
+                System.out.println(intoBinaryOrOctalNs());
+                break;
+            case 16:
+                System.out.println(intoHexNs());
+                break;
+            default:
+                System.err.println("Неизвестное основание сс");
+        }
     }
 
     public static void receiveInput() {
@@ -24,21 +36,35 @@ public class NumeralSystems {
         radix = in.nextInt();
     }
 
-    public static void intoBinaryString() {
-        System.out.println("Binary: " + Integer.toBinaryString(number));
+    public static String intoBinaryOrOctalNs() {
+
+        int value = number;
+        String result = "";
+
+        if (number <= 0) {
+            result = "0";
+        } else {
+            while (value > 0) {
+                result = value % radix + result;
+                value = value / radix;
+            }
+        }
+        return result;
     }
 
-    public static void intoHexString() {
-        System.out.println("Hex: " + Integer.toHexString(number));
-    }
+    public static String intoHexNs() {
+        final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        int value = number;
+        String result = "";
 
-    public static void intoOctalString() {
-        System.out.println("Octal: " + Integer.toOctalString(number));
-    }
-
-    public static void intoCustomString() {
-        System.out.println("");
-        System.out.println("Десятичное число '" + number + "' в '" + radix + "'-ой системе счисления равно '" +
-                            Integer.toString(number, radix) + "'.");
+        if (value <= 0) {
+            result = "0";
+        } else {
+            while (value > 0) {
+                result = hexDigits[value % radix] + result;
+                value = value / radix;
+            }
+        }
+        return result;
     }
 }
