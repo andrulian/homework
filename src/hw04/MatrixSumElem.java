@@ -8,11 +8,24 @@ public class MatrixSumElem {
 
         printMatrix(matrix);
 
-        
+        System.out.println(countSum(matrix, 13));
+    }
 
+    private static int countSum(int[][] matrix, int maxSum) {
+        int totalSum = 0;
+        int step = 0;
 
-
-
+        OUTER: for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                step++;
+                totalSum += matrix[i][j];
+                if(totalSum > maxSum) {
+                    System.out.println("step: " + step);
+                    break OUTER;
+                }
+            }
+        }
+        return totalSum;
     }
 
     private static void printMatrix(int[][] matrix) {
@@ -22,5 +35,6 @@ public class MatrixSumElem {
                 System.out.print(matrix[i][j] + " ");
             }
         }
+        System.out.println("\n");
     }
 }
