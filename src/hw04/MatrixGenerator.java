@@ -2,7 +2,8 @@ package hw04;
 
 import java.util.Random;
 
-public class MatrixGenarator {
+
+public class MatrixGenerator {
 
     public static int[][] generator(int lastRowSize, int randomRange) {
 

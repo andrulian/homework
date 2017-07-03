@@ -4,7 +4,7 @@ package hw04;
 public class MatrixSumElem {
     public static void main(String[] args) {
 
-        int[][] matrix = MatrixGenarator.generator(25, 250);
+        int[][] matrix = MatrixGenerator.generator(25, 250);
 
         printMatrix(matrix);
 
