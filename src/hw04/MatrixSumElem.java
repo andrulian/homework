@@ -4,30 +4,27 @@ package hw04;
 public class MatrixSumElem {
     public static void main(String[] args) {
 
-        int[][] matrix = MatrixGenarator.generator(5, 15);
+        int[][] matrix = MatrixGenarator.generator(25, 250);
 
         printMatrix(matrix);
 
-        System.out.println(countSum(matrix, 13));
+        countSum(matrix);
     }
-
-    private static int countSum(int[][] matrix, int maxSum) {
-        int totalSum = 0;
-        int step = 0;
+    private static void countSum(int[][] matrix) {
 
         OUTER: for (int i = 0; i < matrix.length; i++) {
+            int sumRow = 0;
             for (int j = 0; j < matrix[i].length; j++) {
-                step++;
-                totalSum += matrix[i][j];
-                if(totalSum > maxSum) {
-                    System.out.println("step: " + step);
-                    break OUTER;
-                }
-            }
-        }
-        return totalSum;
-    }
 
+                if(matrix[i][j] < 0) {
+                    System.out.println("В " + i + "-ом ряду отридцательный элемент " + matrix[i][j]);
+                    continue OUTER;
+                }
+                sumRow += matrix[i][j];
+            }
+            System.out.println("Сумма элементов ряда " + i + " равна " + sumRow);
+        }
+    }
     private static void printMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length ; i++) {
             System.out.println();
