@@ -6,7 +6,7 @@ public class DataGenerator {
 
     public static byte[] LETTERS = {'A', 'B', 'C', 'D'};
 
-    public static byte[] dataGenerator(int size) {
+    public static byte[] generator(int size) {
         Random random = new Random();
         byte[] data = new byte[size];
 
@@ -15,5 +15,4 @@ public class DataGenerator {
         }
         return data;
     }
-
 }
