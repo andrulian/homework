@@ -25,6 +25,7 @@ public class NumeralSystems {
                 break;
             default:
                 System.err.println("Неизвестное основание сс");
+                break;
         }
     }
 
