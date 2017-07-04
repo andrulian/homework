@@ -1,4 +1,4 @@
-package hw05.printarray;
+package hw05;
 
 
 import java.util.Random;

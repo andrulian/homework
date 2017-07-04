@@ -1,12 +1,10 @@
-package hw05.printarray;
+package hw05;
 
 public class PrintArray {
 
     public static void main(String[] args) {
 
         int[] data = ArrayGenerator.generator(10);
-
-//        System.out.println(Arrays.toString(data));
 
         printMethod(data);
 
