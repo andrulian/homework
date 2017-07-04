@@ -1,28 +1,39 @@
 package hw05;
 
+
+import java.util.Random;
+
 public class ArrayGenerator {
 
-    public static ArrayGenerator(String ArrayType) {
-        switch (type) {
-            case "int":
-                System.out.println("INT");
-                break;
-            default:
-                System.out.println("default");
+    public static int[] generator(int size) {
+
+        int[] data = new int[size];
+        Random rand = new Random();
+
+        for (int i = 0; i < data.length; i++) {
+            data[i] = rand.nextInt();
         }
-
-//        switch (radix) {
-//            case 2:
-//                System.out.println(intoBinaryOrOctalNs());
-//                break;
-//            case 8:
-//                System.out.println(intoBinaryOrOctalNs());
-//                break;
-//            case 16:
-//                System.out.println(intoHexNs());
-//                break;
-//            default:
-//                System.err.println("Неизвестное основание сс");
-
+        return data;
     }
+
+
+//    public static void generator(String ArrayType) {
+
+//    public ArrayGenerator(String ArrayType) {
+//        switch (ArrayType) {
+//            case "int":
+//                System.out.println("int type");
+//                break;
+//
+//            case "String":
+//                System.out.println("String type");
+//                break;
+//
+//            default:
+//                System.err.println("Enter valid data type");
+//                break;
+//        }
+//    }
+
+
 }
