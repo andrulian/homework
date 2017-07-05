@@ -6,13 +6,19 @@ public class PrintArray {
 
         int[] data = ArrayGenerator.generator(10);
 
-        printMethod(data);
+        System.out.println(printMethod(data));
 
     }
 
-    private static void printMethod(int[] data) {
-        for (int elem : data) {
-            System.out.print(elem + " ");
+    private static String printMethod(int[] data) {
+        String str = "[";
+        int len = data.length - 1;
+
+        for (int i = 0; i < len; i++) {
+            str += data[i] + ", ";
         }
+        str += data[len] + "]";
+
+        return str;
     }
 }
