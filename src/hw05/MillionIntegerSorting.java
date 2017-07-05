@@ -2,24 +2,20 @@ package hw05;
 
 import java.util.Arrays;
 
+
 public class MillionIntegerSorting {
 
     public static void main(String[] args) {
-//        int[] data = ArrayGenerator.generator(1000000);
+        int[] data0 = ArrayGenerator.generator(1000000,"real");
+        int[] data1 = ArrayGenerator.generator(1000000, "natural");
 
-//        int[] data = ArrayGenerator.generator(10);
-        int[] data = new int[] {4, 15, 28, 73, 14, 5, 46, 97, 81, 9};
+        final long startTime0 = System.currentTimeMillis();
+        Arrays.sort(data0);
+        System.out.println("\nArrays.sort time: " + (System.currentTimeMillis() - startTime0) + " ms");
 
-        System.out.print("Unsorted: " + Arrays.toString(data));
-
-        final long startTime = System.currentTimeMillis();
-
-//        Arrays.sort(data);
-        MyLousyRadixSort.makeRadixSort(data);
-
-        System.out.print("\nSorted:   " + Arrays.toString(data));
-        System.out.println("\n\nTime: " + (System.currentTimeMillis() - startTime) + " ms");
-
+        final long startTime1 = System.currentTimeMillis();
+        RadixSort.makeRadixSort(data1);
+        System.out.println("RadixSort time: " + (System.currentTimeMillis() - startTime1) + " ms");
 
     }
 }

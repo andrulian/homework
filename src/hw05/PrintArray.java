@@ -4,7 +4,7 @@ public class PrintArray {
 
     public static void main(String[] args) {
 
-        int[] data = ArrayGenerator.generator(10);
+        int[] data = ArrayGenerator.generator(10, "real");
 
         System.out.println(printMethod(data));
 
