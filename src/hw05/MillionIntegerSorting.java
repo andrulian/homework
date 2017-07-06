@@ -9,11 +9,11 @@ public class MillionIntegerSorting {
         int[] data0 = ArrayGenerator.generator(1000000,"real");
         int[] data1 = ArrayGenerator.generator(1000000, "natural");
 
-        final long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         Arrays.sort(data0);
         System.out.println("\nArrays.sort time: " + (System.currentTimeMillis() - startTime) + " ms");
 
-        startTime= System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
         RadixSort.makeRadixSort(data1);
         System.out.println("RadixSort time: " + (System.currentTimeMillis() - startTime) + " ms");
 
