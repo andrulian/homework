@@ -14,11 +14,12 @@ public class PrintArray {
         String str = "[";
         int len = data.length - 1;
 
-        for (int i = 0; i < len; i++) {
-            str += data[i] + ", ";
+        if (data.length > 0) {
+            for (int i = 0; i < len; i++) {
+                str += data[i] + ", ";
+            }
+            str += data[len] + "]";
         }
-        str += data[len] + "]";
-
         return str;
     }
 }
