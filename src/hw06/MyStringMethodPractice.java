@@ -37,9 +37,62 @@ public class MyStringMethodPractice {
         return sSub;
     }
 
-//    public static String replace(String s) {
+    public static String replace(String str, char oldChar, char newChar) {
+
+        int index = 0;
+        char[] sarr = str.toCharArray();
+        int len = sarr.length;
+
+        if (oldChar != newChar) {
+
+            for (int i = 0; i < len; i++) {
+                if(str.charAt(i) == oldChar) {
+                    index = i;
+                    break;
+                }
+            }
+            char[] buf = new char[len];
+
+            System.arraycopy(sarr, 0, buf, 0, index);
+
+            buf[index] = newChar;
+
+            System.arraycopy(sarr, index + 1, buf, index + 1, len - (index + 1));
+
+            return new String(buf);
+        }
+        return str;
+    }
+//    if(oldChar != newChar) {
+//        int len = this.value.length;
+//        int i = -1;
+//        char[] val = this.value;
 //
+//        do {
+//            ++i;
+//        } while(i < len && val[i] != oldChar);
+//
+//        if(i < len) {
+//            char[] buf = new char[len];
+//
+//            for(int j = 0; j < i; ++j) {
+//                buf[j] = val[j];
+//            }
+//
+//            while(i < len) {
+//                char c = val[i];
+//                buf[i] = c == oldChar?newChar:c;
+//                ++i;
+//            }
+//
+//            return new String(buf, true);
+//        }
 //    }
+
+
+
+
+
 
     private static boolean hasNoTrailingOrLeadingSpaces(String s) {
         return s.indexOf(' ') != 0 && s.lastIndexOf(' ') != s.length() - 1;
