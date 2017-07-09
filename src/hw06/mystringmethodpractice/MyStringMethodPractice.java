@@ -1,4 +1,4 @@
-package hw06;
+package hw06.mystringmethodpractice;
 
 import java.util.Arrays;
 
@@ -29,7 +29,7 @@ public class MyStringMethodPractice {
                 break;
             }
         }
-        
+
         String sSub = s.substring(beginIndex, endIndex+1);
         return sSub;
     }

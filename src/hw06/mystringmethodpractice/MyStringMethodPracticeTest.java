@@ -1,4 +1,4 @@
-package hw06;
+package hw06.mystringmethodpractice;
 
 import mytestframework.Asserts;
 
