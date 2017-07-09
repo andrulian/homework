@@ -2,7 +2,7 @@ package mytestframework;
 
 public class Asserts {
 
-//    Boolean
+    //    Boolean
     public static boolean assertEquals(boolean actual, boolean expected) {
         boolean equals = actual == expected;
         if (!equals) {
@@ -11,6 +11,7 @@ public class Asserts {
         return equals;
 
     }
+
     public static boolean assertNotEquals(boolean actual, boolean expected) {
         boolean equals = actual != expected;
         if (!equals) {
@@ -18,8 +19,8 @@ public class Asserts {
         }
         return equals;
     }
-    
-//    Integer
+
+    //    Integer
     public static boolean assertEquals(int actual, int expected) {
         boolean equals = actual == expected;
         if (!equals) {
@@ -28,6 +29,7 @@ public class Asserts {
         return equals;
 
     }
+
     public static boolean assertNotEquals(int actual, int expected) {
         boolean equals = actual != expected;
         if (!equals) {
@@ -36,7 +38,7 @@ public class Asserts {
         return equals;
     }
 
-//    String
+    //    String
     public static boolean assertEquals(String actual, String expected) {
         boolean equals = actual.equals(expected);
         if (!equals) {
@@ -44,6 +46,7 @@ public class Asserts {
         }
         return equals;
     }
+
     public static boolean assertNotEquals(String actual, String expected) {
         boolean equals = !actual.equals(expected);
         if (!equals) {
