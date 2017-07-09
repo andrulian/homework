@@ -23,11 +23,6 @@ public class MyStringArrayList {
         return "";
     }
 
-//    this.rangeCheck(index);
-//    E oldValue = this.elementData(index);
-//        this.elementData[index] = element;
-//        return oldValue;
-
     public static String set(int index, String newElem) {
         if (rangeCheck(index) ) {
             String oldElem = elements[index];
@@ -35,6 +30,10 @@ public class MyStringArrayList {
             return oldElem;
         }
         return "";
+    }
+
+    public static boolean isEmpty() {
+        return size == 0;
     }
 
     public static int size() {

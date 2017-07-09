@@ -20,6 +20,10 @@ public class MyStringArrayListTest {
 
         System.out.println(Asserts.assertEquals(MyStringArrayList.set(1, "elem_1.1"), "elem_1"));
 
+        System.out.println(Asserts.assertEquals(MyStringArrayList.isEmpty(), false));
+
+
+
 
     }
 }
