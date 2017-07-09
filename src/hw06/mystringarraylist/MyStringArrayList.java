@@ -32,6 +32,20 @@ public class MyStringArrayList {
         return "";
     }
 
+    public static String remove(int index) {
+        if (rangeCheck(index) ) {
+            String oldElem = elements[index];
+            int tillEnd = size - 1 - index;
+            if(tillEnd > 0) {
+                System.out.println("TILL END");
+                System.arraycopy(elements, index + 1, elements, index, tillEnd);
+            }
+            elements[--size] = null;
+            return oldElem;
+        }
+        return "";
+    }
+
     public static boolean isEmpty() {
         return size == 0;
     }
