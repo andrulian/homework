@@ -39,6 +39,9 @@ public class MyStringMethodPractice {
 
     public static String replace(String str, char oldChar, char newChar) {
 
+        if (str == null || str.length() == 0) {
+            return str;
+        }
         int index = 0;
         char[] sarr = str.toCharArray();
         int len = sarr.length;
@@ -88,11 +91,6 @@ public class MyStringMethodPractice {
 //            return new String(buf, true);
 //        }
 //    }
-
-
-
-
-
 
     private static boolean hasNoTrailingOrLeadingSpaces(String s) {
         return s.indexOf(' ') != 0 && s.lastIndexOf(' ') != s.length() - 1;
