@@ -14,7 +14,7 @@ public class MyStringMethodPracticeTest {
         //             ^1     ^2
         String s6 = "";
 
-        System.out.println(Asserts.assertEquals(MyStringMethodPractice.trim(s6), "");
+//        System.out.println(Asserts.assertEquals(MyStringMethodPractice.trim(s6), "");
 
     }
 }

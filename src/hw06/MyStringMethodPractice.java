@@ -19,9 +19,9 @@ public class MyStringMethodPractice {
         return s;
     }
 
-    public static String replace(String s) {
-
-    }
+//    public static String replace(String s) {
+//
+//    }
 
     private static boolean hasNoTrailingOrLeadingSpaces(String s) {
         return s.indexOf(' ') != 0 && s.lastIndexOf(' ') != s.length() - 1;
