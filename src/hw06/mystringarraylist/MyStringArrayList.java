@@ -23,13 +23,33 @@ public class MyStringArrayList {
         return "";
     }
 
+//    this.rangeCheck(index);
+//    E oldValue = this.elementData(index);
+//        this.elementData[index] = element;
+//        return oldValue;
+
+    public static String set(int index, String newElem) {
+        if (rangeCheck(index) ) {
+            String oldElem = elements[index];
+            elements[index] = newElem;
+            return oldElem;
+        }
+        return "";
+    }
+
+    public static int size() {
+        return size;
+    }
+
     private static boolean rangeCheck(int index) {
         if(index < 0 || index >= size) {
-            System.err.println("ERROR! Index out of range");
+            System.err.println("Index out of range");
             return false;
         }
         return true;
     }
+
+
 
 
 
