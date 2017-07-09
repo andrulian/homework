@@ -17,9 +17,19 @@ public class MyStringArrayList {
     }
 
     public static String get(int index) {
-        return elements[index];
+        if (rangeCheck(index) ) {
+            return elements[index];
+        }
+        return "";
     }
 
+    private static boolean rangeCheck(int index) {
+        if(index < 0 || index >= size) {
+            System.err.println("ERROR! Index out of range");
+            return false;
+        }
+        return true;
+    }
 
 
 

@@ -8,5 +8,6 @@ public class MyStringArrayListTest {
         MyStringArrayList.add("testing");
 
         System.out.println(Asserts.assertEquals(MyStringArrayList.get(0), "testing"));
+        System.out.println(Asserts.assertEquals(MyStringArrayList.get(1000), ""));
     }
 }
