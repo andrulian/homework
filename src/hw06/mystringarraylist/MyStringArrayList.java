@@ -3,7 +3,6 @@ package hw06.mystringarraylist;
 import java.util.Arrays;
 
 
-//Доделать класс StringArrayList:   добавить методы get, set, size, isEmpty, remove(value), toString (переписать)
 public class MyStringArrayList {
     static final int DEFAULT_SIZE = 2;
     static String[] elements = new String[DEFAULT_SIZE];
@@ -37,7 +36,6 @@ public class MyStringArrayList {
             String oldElem = elements[index];
             int tillEnd = size - 1 - index;
             if(tillEnd > 0) {
-                System.out.println("TILL END");
                 System.arraycopy(elements, index + 1, elements, index, tillEnd);
             }
             elements[--size] = null;
@@ -61,13 +59,6 @@ public class MyStringArrayList {
         }
         return true;
     }
-
-
-
-
-
-
-
 //    @Override
 //    public String toString() {
 //
