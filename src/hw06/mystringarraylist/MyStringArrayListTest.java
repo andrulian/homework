@@ -19,7 +19,7 @@ public class MyStringArrayListTest {
         System.out.println(Asserts.assertEquals(MyStringArrayList.get(0), "elem_0"));
         System.out.println(Asserts.assertEquals(MyStringArrayList.get(1000), ""));
 
-        System.out.println(Asserts.assertEquals(MyStringArrayList.size(), 2));
+        System.out.println(Asserts.assertEquals(MyStringArrayList.size(), 6));
 
         System.out.println(Asserts.assertEquals(MyStringArrayList.set(1, "elem_1.1"), "elem_1"));
 
