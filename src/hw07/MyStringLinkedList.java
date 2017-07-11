@@ -2,7 +2,20 @@ package hw07;
 
 public class MyStringLinkedList {
 
-    public static void add(String elem_1) {
+    private static Node first;// = new Node(null);
+    private static Node last;// = new Node(null);
+
+    public static void add(String value) {
+        Node newNode = new Node(value, last);
+        if (first == null) {
+            first.node = newNode;
+        } else {
+            last.node.node = newNode;
+        }
+        last.node = newNode;
+        
+
+
     }
 
     public static String set(int i, String s) {
