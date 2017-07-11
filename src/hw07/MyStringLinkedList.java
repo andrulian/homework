@@ -30,6 +30,7 @@ public class MyStringLinkedList {
     }
 
     public static String remove(int value) {
+//        homework. remove by index
         if (value > size || value < 0) {
             System.err.println("Index is out of range");
             return "";
@@ -38,15 +39,17 @@ public class MyStringLinkedList {
         Node curreNode = first;
         Node previNode = null;
 
-        for (int i = 0; i < value; i++) {
-            System.out.println(curreNode.value);
-            previNode = curreNode;
-            curreNode = curreNode.node;
+        if (value == 0) {
+            first = first.node;
+        } else {
+            for (int i = 0; i < value; i++) {
+                previNode = curreNode;
+                curreNode = curreNode.node;
+            }
+            previNode.node = curreNode.node;
         }
 
-        previNode.node = curreNode.node;
         size--;
-
         return curreNode.value;
     }
 
@@ -59,14 +62,17 @@ public class MyStringLinkedList {
     }
 
     public static void printList() {
-        System.out.println("\nMyStringLinkedList content: ");
+        System.out.println("\nMyStringLinkedList content: \n");
         Node curreNode = first;
         Node previNode = null;
 
         for (int i = 0; i < size; i++) {
-            System.out.println(curreNode.value);
+            System.out.println("value: " + curreNode.value);
+            System.out.println("address: " + curreNode);
+            System.out.println("next node: " + curreNode.node+"\n");
             previNode = curreNode;
             curreNode = curreNode.node;
         }
+        System.out.println("\nlast. " + "value: " + last.value + ", address: " + last + ", node: " + last.node);
     }
 }

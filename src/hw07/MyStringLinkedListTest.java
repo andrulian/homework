@@ -12,7 +12,7 @@ public class MyStringLinkedListTest {
         MyStringLinkedList.add("elem_4");
         MyStringLinkedList.add("elem_5");
 
-        System.out.println(MyStringLinkedList.remove(4));
+        MyStringLinkedList.remove(6);
         MyStringLinkedList.printList();
 
 
