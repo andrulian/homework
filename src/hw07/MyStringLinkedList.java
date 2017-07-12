@@ -7,7 +7,7 @@ public class MyStringLinkedList {
     private static int size;
 
     public static void add(String value) {
-        Node newNode = new Node(value, last);
+        Node newNode = new Node(value, null);
         if (first == null) {
             first = newNode;
         } else {
@@ -36,21 +36,20 @@ public class MyStringLinkedList {
             return "";
         }
 
-        Node curreNode = first;
-        Node previNode = null;
+        Node currentNode = first;
+        Node previousNode = null;
 
         if (value == 0) {
             first = first.node;
         } else {
-            for (int i = 0; i < value; i++) {
-                previNode = curreNode;
-                curreNode = curreNode.node;
+            for (int i = 0; i < value-1; i++) {
+                previousNode = currentNode;
+                currentNode = currentNode.node;
             }
-            previNode.node = curreNode.node;
+            previousNode.node = currentNode.node;
         }
-
         size--;
-        return curreNode.value;
+        return currentNode.value;
     }
 
     public static int size() {
