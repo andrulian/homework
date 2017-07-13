@@ -32,7 +32,7 @@ public class MyStringLinkedListTest {
 //        System.out.println(Asserts.assertEquals(MyStringLinkedList.remove("elem_3"), true));
 
 
-//        MyStringLinkedList.printList();
+        MyStringLinkedList.printList();
     }
 
     private static void listFiller() {
