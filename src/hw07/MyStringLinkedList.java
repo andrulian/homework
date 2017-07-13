@@ -76,8 +76,8 @@ public class MyStringLinkedList {
 
         } else {
             for (int i = 0; i < value; i++) {
-                previousNode = currentNode; // elem_5
-                currentNode = currentNode.node; // null
+                previousNode = currentNode;
+                currentNode = currentNode.node;
             }
 
             if (currentNode.node != null) {
@@ -101,18 +101,28 @@ public class MyStringLinkedList {
     }
 
     public static void printList() {
-        System.out.println("\nMyStringLinkedList content: \n");
+        System.out.println("\n-=MyStringLinkedList content=-");
         System.out.println("Size: " +  size);
         Node curreNode = first;
         Node previNode = null;
 
-        for (int i = 0; i < size; i++) {
-            System.out.println("value: " + curreNode.value);
-            System.out.println("address: " + curreNode);
-            System.out.println("next node: " + curreNode.node+"\n");
-            previNode = curreNode;
-            curreNode = curreNode.node;
+        if (isEmpty()) {
+            System.out.println("No content!");
+        } else {
+            for (int i = 0; i < size; i++) {
+                System.out.println("value: " + curreNode.value);
+                System.out.println("address: " + curreNode);
+                System.out.println("next node: " + curreNode.node + "\n");
+                previNode = curreNode;
+                curreNode = curreNode.node;
+            }
+            System.out.println("\nlast. " + "value: " + last.value + ", address: " + last + ", node: " + last.node);
         }
-        System.out.println("\nlast. " + "value: " + last.value + ", address: " + last + ", node: " + last.node);
+    }
+
+    public static void listEraser() {
+        first = null;
+        last = null;
+        size = 0;
     }
 }
