@@ -1,5 +1,7 @@
 package hw07;
 
+import java.util.Arrays;
+
 public class MyStringLinkedList {
 
     private static Node first;
@@ -30,13 +32,17 @@ public class MyStringLinkedList {
         Node previousNode = null;
         boolean res = false;
 
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size; i++) {
             if (currentNode.value.equals(str)) {
                 if (previousNode == null) {
                     first = currentNode.node;
                 } else {
                     previousNode.node = currentNode.node;
+                    if (currentNode.node == null) {
+                        last = previousNode;
+                    }
                 }
+
                 size--;
                 res = true;
                 break;
@@ -54,7 +60,7 @@ public class MyStringLinkedList {
     }
 
     public static String remove(int value) {
-        if (value > size || value < 0) {
+        if (value > size - 1 || value < 0) {
             System.err.println("Index is out of range");
             return "";
         }
@@ -67,17 +73,24 @@ public class MyStringLinkedList {
             if (first == null) {
                 last = null;
             }
+
         } else {
-            for (int i = 0; i < value-1; i++) {
-                previousNode = currentNode;
-                currentNode = currentNode.node;
+            for (int i = 0; i < value; i++) {
+                previousNode = currentNode; // elem_5
+                currentNode = currentNode.node; // null
             }
-            previousNode.node = currentNode.node;
+
+            if (currentNode.node != null) {
+                previousNode.node = currentNode.node;
+            } else {
+                previousNode.node = null;
+                last = previousNode;
+            }
         }
+
         size--;
         return currentNode.value;
     }
-
 
     public static int size() {
         return size;
