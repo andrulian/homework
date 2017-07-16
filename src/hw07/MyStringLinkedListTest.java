@@ -23,7 +23,10 @@ public class MyStringLinkedListTest {
         System.out.println(Asserts.assertEquals(MyStringLinkedList.remove("elem_5"), false));
         System.out.println(Asserts.assertEquals(MyStringLinkedList.remove("elem_2"), false));
 
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.get(0), "elem_0"));
+
+
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.get(0), "elem_1"));
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.get(3), ""));
 //        System.out.println(Asserts.assertEquals(MyStringLinkedList.get(1000), ""));
 //        System.out.println(Asserts.assertEquals(MyStringLinkedList.size(), 2));
 //        System.out.println(Asserts.assertEquals(MyStringLinkedList.set(1, "elem_1.1"), "elem_1"));
@@ -32,6 +35,7 @@ public class MyStringLinkedListTest {
 //        System.out.println(Asserts.assertEquals(MyStringLinkedList.remove("elem_3"), true));
 
 
+//        System.out.println(MyStringLinkedList.myStaticToString());
         MyStringLinkedList.printList();
     }
 

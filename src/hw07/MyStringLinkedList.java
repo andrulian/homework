@@ -1,6 +1,5 @@
 package hw07;
 
-import java.util.Arrays;
 
 public class MyStringLinkedList {
 
@@ -24,7 +23,22 @@ public class MyStringLinkedList {
     }
 
     public static String get(int i) {
-        return "";
+        Node currentNode = first;
+
+        if (i < 0 || i >= size) {
+//            System.err.println("Index out of range");
+            return "";
+        }
+
+         if (i == 0) {
+            return first.value;
+         }
+
+        for (int j = 0; j <= i; j++) {
+            currentNode = currentNode.node;
+        }
+
+        return currentNode.value;
     }
 
     public static boolean remove(String str) {
@@ -60,7 +74,7 @@ public class MyStringLinkedList {
     }
 
     public static String remove(int value) {
-        if (value > size - 1 || value < 0) {
+        if (value >= size || value < 0) {
             System.err.println("Index is out of range");
             return "";
         }
@@ -103,18 +117,18 @@ public class MyStringLinkedList {
     public static void printList() {
         System.out.println("\n-=MyStringLinkedList content=-");
         System.out.println("Size: " +  size);
-        Node curreNode = first;
-        Node previNode = null;
+        Node currentNode = first;
+        Node previousNode = null;
 
         if (isEmpty()) {
             System.out.println("No content!");
         } else {
             for (int i = 0; i < size; i++) {
-                System.out.println("value: " + curreNode.value);
-                System.out.println("address: " + curreNode);
-                System.out.println("next node: " + curreNode.node + "\n");
-                previNode = curreNode;
-                curreNode = curreNode.node;
+                System.out.println("value: " + currentNode.value);
+                System.out.println("address: " + currentNode);
+                System.out.println("next node: " + currentNode.node + "\n");
+                previousNode = currentNode;
+                currentNode = currentNode.node;
             }
             System.out.println("\nlast. " + "value: " + last.value + ", address: " + last + ", node: " + last.node);
         }
@@ -124,5 +138,25 @@ public class MyStringLinkedList {
         first = null;
         last = null;
         size = 0;
+    }
+
+    public static String myStaticToString() {
+        StringBuilder sb = new StringBuilder();
+        Node currentNode = first;
+
+        sb.append("[");
+
+        if (currentNode != null) {
+            sb.append(currentNode.value);
+        }
+
+        while (currentNode.node != null) {
+            currentNode = currentNode.node;
+            sb.append(", ");
+            sb.append(currentNode.value);
+        }
+
+        sb.append("]");
+        return sb.toString();
     }
 }
