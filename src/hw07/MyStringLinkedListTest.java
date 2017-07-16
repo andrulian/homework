@@ -41,11 +41,8 @@ public class MyStringLinkedListTest {
     }
 
     private static void listFiller() {
-        MyStringLinkedList.add("elem_0");
-        MyStringLinkedList.add("elem_1");
-        MyStringLinkedList.add("elem_2");
-        MyStringLinkedList.add("elem_3");
-        MyStringLinkedList.add("elem_4");
-        MyStringLinkedList.add("elem_5");
+        for (int i = 0; i < 6; i++) {
+            MyStringLinkedList.add("elem_" + i);
+        }
     }
 }
