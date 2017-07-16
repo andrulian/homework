@@ -7,6 +7,26 @@ public class MyStringLinkedList {
     private static Node last;
     private static int size;
 
+    public static String myStaticToString() {
+        StringBuilder sb = new StringBuilder();
+        Node currentNode = first;
+
+        sb.append("[");
+
+        if (currentNode != null) {
+            sb.append(currentNode.value);
+        }
+
+        while (currentNode.node != null) {
+            currentNode = currentNode.node;
+            sb.append(", ");
+            sb.append(currentNode.value);
+        }
+
+        sb.append("]");
+        return sb.toString();
+    }
+
     public static void add(String value) {
         Node newNode = new Node(value, null);
         if (first == null) {
@@ -18,28 +38,39 @@ public class MyStringLinkedList {
         size++;
     }
 
-    public static String set(int i, String s) {
-        return "Old string";
+    public static boolean set(int i, String s) {
+        Node elem = peekNode(i);
+
+        if (elem != null) {
+            elem.value = s;
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
-    public static String get(int i) {
+    private static Node peekNode(int i) {
         Node currentNode = first;
 
         if (i < 0 || i >= size) {
 //            System.err.println("Index out of range");
-            return "";
+            return null;
         }
 
-         if (i == 0) {
-            return first.value;
-         }
+        if (i == 0) {
+            return first;
+        }
 
-        for (int j = 0; j <= i; j++) {
+        for (int j = 0; j < i; j++) {
             currentNode = currentNode.node;
         }
 
-        return currentNode.value;
+        return currentNode;
+
     }
+
+    public static String get(int i) { return peekNode(i) == null ? "" : peekNode(i).value; }
 
     public static boolean remove(String str) {
         Node currentNode = first;
@@ -138,25 +169,5 @@ public class MyStringLinkedList {
         first = null;
         last = null;
         size = 0;
-    }
-
-    public static String myStaticToString() {
-        StringBuilder sb = new StringBuilder();
-        Node currentNode = first;
-
-        sb.append("[");
-
-        if (currentNode != null) {
-            sb.append(currentNode.value);
-        }
-
-        while (currentNode.node != null) {
-            currentNode = currentNode.node;
-            sb.append(", ");
-            sb.append(currentNode.value);
-        }
-
-        sb.append("]");
-        return sb.toString();
     }
 }

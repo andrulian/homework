@@ -27,15 +27,16 @@ public class MyStringLinkedListTest {
 
         System.out.println(Asserts.assertEquals(MyStringLinkedList.get(0), "elem_1"));
         System.out.println(Asserts.assertEquals(MyStringLinkedList.get(3), ""));
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.get(1000), ""));
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.size(), 2));
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.set(1, "elem_1.1"), "elem_1"));
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.isEmpty(), false));
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.remove(4), "elem_4"));
-//        System.out.println(Asserts.assertEquals(MyStringLinkedList.remove("elem_3"), true));
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.get(1000), ""));
 
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.set(0, "elem_1.1"), true));
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.set(1, "elem_3.1"), true));
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.set(2, "elem_4.1"), true));
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.set(3, "elem_out.1"), false));
 
-//        System.out.println(MyStringLinkedList.myStaticToString());
+        System.out.println(Asserts.assertEquals(MyStringLinkedList.isEmpty(), false));
+
+        System.out.println(MyStringLinkedList.myStaticToString());
         MyStringLinkedList.printList();
     }
 
