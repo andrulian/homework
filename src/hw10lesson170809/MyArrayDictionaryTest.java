@@ -24,7 +24,6 @@ public class MyArrayDictionaryTest {
         mad.print();
 
 
-
 //        System.out.println(Asserts.assertEquals(MyArrayDictionary.remove(0), "elem_0"));
 //        System.out.println(Asserts.assertEquals(MyArrayDictionary.);
     }
