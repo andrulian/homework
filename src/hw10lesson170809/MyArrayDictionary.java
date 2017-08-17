@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public class MyArrayDictionary<T> implements Iterable<T[]>{
 
-    private static final int CURRENT_SIZE = 10;
-    static final double LOAD_FACTOR = 0.5;
+    static final double LOAD_FACTOR = 0.7;
+    private static int currentSize = 10;
     private int capacity;
 
-    List<T[]>[] data = new List[CURRENT_SIZE];
+    List<T[]>[] data = new List[currentSize];
 
     public void put(T key, T value) {
         int index = hash(key);
@@ -37,11 +37,14 @@ public class MyArrayDictionary<T> implements Iterable<T[]>{
 
     private void resize() {
         System.out.println("Capacity: " + capacity);
+        System.out.println("Data length: " + data.length);
 
-        if (CURRENT_SIZE * LOAD_FACTOR <= capacity) {
+        if (currentSize * LOAD_FACTOR <= capacity) {
             System.err.println("WARNING");
 
-            List<T[]>[] newData = new List[CURRENT_SIZE * 2];
+            currentSize *= 2;
+
+            List<T[]>[] newData = new List[currentSize];
 
             System.arraycopy(data, 0, newData, 0, data.length);
 
@@ -56,6 +59,7 @@ public class MyArrayDictionary<T> implements Iterable<T[]>{
         for (List<T[]> i : data) {
             if (i != null) {
                 for (T[] j : i) {
+
                     System.out.println(Arrays.toString(j));
                 }
             }
