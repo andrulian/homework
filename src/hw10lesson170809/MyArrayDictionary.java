@@ -1,46 +1,63 @@
 package hw10lesson170809;
 
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Iterator;
 import java.util.ArrayList;
 
 
-//    String[] was used instead of Pair class just for a change.
+public class MyArrayDictionary<T> implements Iterable<T[]>{
 
-public class MyArrayDictionary implements Iterable<String[]>{
     private static final int MAX = 10;
 
-    List<String[]>[] data = new List[MAX];
+    List<T[]>[] data = new List[MAX];
 
-    public void put(String key, String value) {
+    public void put(T key, T value) {
         int index = hash(key);
 
-        List<String[]> list = data[index];
+        List<T[]> list = data[index];
 
         if (list == null) {
             list = new ArrayList<>();
             data[index] = list;
         }
 
-        String[] pair = getPair(key);
+//        T[] pair = getPair(key);
+        T[] pair = getPair(key);
 
         if (pair == null) {
-            list.add(new String[] {key, value});
-        } else { pair[1] = value; }
+
+            list.add( (T[]) new Object[]{key, value} );
+
+        } else { pair[1] = value;}
     }
 
-    private int hash(String key) {
+    public void print() {
+        for (List<T[]> i : data) {
+//            System.out.println( i );
+//            System.out.println( Arrays.toString(i.toArray()) );
+            if (i != null) {
+                for (T[] j : i) {
+                    System.out.println(Arrays.toString(j));
+                }
+            }
+        }
+    }
+
+    private int hash(T key) {
         return key.hashCode() & 0x7FFFFFF % data.length;
     }
 
-    private String[] getPair(String key) {
+    private T[] getPair(T key) {
         int index = hash(key);
+//        System.out.println(index);
+//        System.out.println(data[index]);
 
-        List<String[]> list = data[index];
+        List<T[]> list = data[index];
 
         if (list == null) {return null;}
 
-        for (String[] pair : list) {
+        for (T[] pair : list) {
             if (pair[0].equals(key)) {
                 return pair;
             }
@@ -49,17 +66,16 @@ public class MyArrayDictionary implements Iterable<String[]>{
         return null;
     }
 
-    public String get(String key) {
-        String[] pair = getPair(key);
-
+    public T get(T key) {
+        T[] pair = getPair(key);
         return pair == null ? null : pair[1];
     }
 
     @Override
-    public Iterator<String[]> iterator() {
-        return new Iterator<String[]>() {
+    public Iterator<T[]> iterator() {
+        return new Iterator<T[]>() {
             int currentElement = -1;
-            Iterator<String[]> listIterator = null;
+            Iterator<T[]> listIterator = null;
 
             @Override
             public boolean hasNext() {
@@ -71,7 +87,7 @@ public class MyArrayDictionary implements Iterable<String[]>{
                 listIterator = null;
 
                 for (++currentElement; listIterator == null && currentElement < data.length; currentElement++) {
-                    List<String[]> list = data[currentElement];
+                    List<T[]> list = data[currentElement];
 
                     if (list == null) {
                         continue;
@@ -88,7 +104,7 @@ public class MyArrayDictionary implements Iterable<String[]>{
             }
 
             @Override
-            public String[] next() {
+            public T[] next() {
                 if (!hasNext()) {
                     throw new IllegalArgumentException();
                 }
@@ -102,4 +118,6 @@ public class MyArrayDictionary implements Iterable<String[]>{
             }
         };
     }
+
+
 }
