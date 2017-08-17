@@ -47,20 +47,10 @@ public class MyArrayDictionary<T> implements Iterable<T[]>{
     private T[] getPair(T key) {
         int index = hash(key);
 
-        List<T[]> list = data[index];
-
-        if (list == null) {return null;}
-
-        for (T[] pair : list) {
-            if (pair[0].equals(key)) {
-                return pair;
-            }
-        }
-
-        return null;
+        return getPair(key, index);
     }
 
-//    with index
+//    with index.
     private T[] getPair(T key, int index) {
 
         List<T[]> list = data[index];

@@ -19,8 +19,6 @@ public class MyArrayDictionaryTest {
 
         mad.put("Zhora", "Moscow");
 
-
-
         System.out.println(mad.get("Zhora"));
 
         mad.print();
