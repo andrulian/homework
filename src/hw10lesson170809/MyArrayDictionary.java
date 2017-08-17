@@ -1,10 +1,11 @@
 package hw10lesson170809;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ArrayList;
 
+// Array of 2 was used instead of Pair class just for a change.         <------
 
 public class MyArrayDictionary<T> implements Iterable<T[]>{
 
@@ -22,20 +23,15 @@ public class MyArrayDictionary<T> implements Iterable<T[]>{
             data[index] = list;
         }
 
-//        T[] pair = getPair(key);
-        T[] pair = getPair(key);
+        T[] pair = getPair(key, index);
 
         if (pair == null) {
-
             list.add( (T[]) new Object[]{key, value} );
-
         } else { pair[1] = value;}
     }
 
     public void print() {
         for (List<T[]> i : data) {
-//            System.out.println( i );
-//            System.out.println( Arrays.toString(i.toArray()) );
             if (i != null) {
                 for (T[] j : i) {
                     System.out.println(Arrays.toString(j));
@@ -50,8 +46,22 @@ public class MyArrayDictionary<T> implements Iterable<T[]>{
 
     private T[] getPair(T key) {
         int index = hash(key);
-//        System.out.println(index);
-//        System.out.println(data[index]);
+
+        List<T[]> list = data[index];
+
+        if (list == null) {return null;}
+
+        for (T[] pair : list) {
+            if (pair[0].equals(key)) {
+                return pair;
+            }
+        }
+
+        return null;
+    }
+
+//    with index
+    private T[] getPair(T key, int index) {
 
         List<T[]> list = data[index];
 
