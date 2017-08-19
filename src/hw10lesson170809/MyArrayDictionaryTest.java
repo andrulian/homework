@@ -23,13 +23,13 @@ public class MyArrayDictionaryTest {
 
 //        mad.print();
 
-        MyArrayDictionary<Integer> imad = new MyArrayDictionary<>();
+//        MyArrayDictionary<Integer> imad = new MyArrayDictionary<>();
+//
+//        for (int i = 1; i < 51; i++ ) {
+//            imad.put(i, i);
+//        }
 
-        for (int i = 1; i < 51; i++ ) {
-            imad.put(i, i);
-        }
-
-        imad.print();
+//        imad.print();
 
 
 
