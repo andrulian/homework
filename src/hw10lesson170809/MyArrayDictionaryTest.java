@@ -9,6 +9,9 @@ import java.util.List;
 public class MyArrayDictionaryTest {
     public static void main(String[] args) {
 
+        MyArrayDictionary<String, Integer> mad = new MyArrayDictionary<>(10);
+
+
 //        MyArrayDictionary<String> mad = new MyArrayDictionary<>();
 //
 //        mad.put("Frank", "LA");
