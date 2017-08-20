@@ -26,7 +26,7 @@ public class MyArrayDictionaryTest {
 
         long start = System.nanoTime();
 
-        for (int i = 1; i < 21; i++) {
+        for (int i = 0; i < 100; i++) {
             imad.put(i, i);
             System.out.println(i);
         }

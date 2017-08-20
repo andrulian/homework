@@ -7,14 +7,11 @@ import java.util.ArrayList;
 
 
 public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>{
-    static final double LOAD_FACTOR = 0.7;
     private int capacity;
-
+    private final double LOAD_FACTOR = 0.7;
     List<Pair>[] data;
 
-    MyArrayDictionary() {
-        this(10);
-    }
+    MyArrayDictionary() {this(16);}
 
     MyArrayDictionary(int capacity) {
         data = new List[capacity];
@@ -54,6 +51,7 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
 
     private void resize() {
         if (data.length * LOAD_FACTOR <= capacity) {
+            System.out.println("====================================================");
             MyArrayDictionary<K, V> mad = new MyArrayDictionary<>(data.length * 2);
 
             for (Pair pair : this) {
@@ -66,8 +64,10 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
     }
 
     private int hash(K key) {
+//        TODO: Delete the following lines
         int h = key.hashCode() & 0x7FFFFFFF % data.length;
         System.out.println("HASH FOR: " + key + " is " + h);
+
         return key.hashCode() & 0x7FFFFFFF % data.length;
     }
 
@@ -83,7 +83,7 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
         if (list == null) {return null;}
 
         for (Pair pair : list) {
-            if (pair.key.equals(key)) {
+            if (pair.key.equals(key) || pair.key == key) {
                 return pair;
             }
         }
