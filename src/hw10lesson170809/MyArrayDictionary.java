@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 
 public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>{
-
     static final double LOAD_FACTOR = 0.7;
-//    private static int currentSize = 10;
-//    private int capacity;
+    private int capacity;
 
-    List<Pair>[] data;// = new List[10];
+    List<Pair>[] data;
 
     MyArrayDictionary() {
         this(10);
@@ -40,11 +38,10 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
         if (list == null) {
             list = new ArrayList<>();
             data[index] = list;
-//            capacity++;
+            capacity++;
         }
 
-        Pair pair = getPair(key);
-//        System.out.println("PAIR: " + pair.key + pair.value);
+        Pair pair = getPair(key, index);
 
         if (pair == null) {
             list.add(new Pair(key, value));
@@ -52,30 +49,30 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
             pair.value = value;
         }
 
-//        Pair pair = Pair(key, value);
-
-//        list.add(pair);
-
-//        resize();
+        resize();
     }
 
     private void resize() {
-        MyArrayDictionary<K, V> mad = new MyArrayDictionary<>(data.length * 2);
+        if (data.length * LOAD_FACTOR <= capacity) {
+            MyArrayDictionary<K, V> mad = new MyArrayDictionary<>(data.length * 2);
 
-        for (Pair pair : this) {
-            mad.put((K)pair.key, (V)pair.value);
+            for (Pair pair : this) {
+                mad.put((K) pair.key, (V) pair.value);
+            }
+
+            this.data = mad.data;
+            System.out.println("NEW CAPACITY: " + this.data.length);
         }
-
-        this.data = mad.data;
     }
 
     private int hash(K key) {
-        return key.hashCode() & 0x7FFFFFF % data.length;
+        int h = key.hashCode() & 0x7FFFFFFF % data.length;
+        System.out.println("HASH FOR: " + key + " is " + h);
+        return key.hashCode() & 0x7FFFFFFF % data.length;
     }
 
     private Pair getPair(K key) {
         int index = hash(key);
-
         return getPair(key, index);
     }
 

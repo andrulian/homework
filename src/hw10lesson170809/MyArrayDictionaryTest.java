@@ -9,33 +9,31 @@ import java.util.List;
 public class MyArrayDictionaryTest {
     public static void main(String[] args) {
 
-        MyArrayDictionary<String, String> mad = new MyArrayDictionary<>();
-
-//        MyArrayDictionary<String> mad = new MyArrayDictionary<>();
+//        MyArrayDictionary<String, String> smad = new MyArrayDictionary<>();
 //
-        mad.put("Frank", "LA");
-        mad.put("Randy", "NY");
-        mad.put("Andrei", "St. Petersburg");
-        mad.put("Zhora", "Goose-Khrustalny");
-        mad.put("Jukka", "Imatra");
-
-        mad.put("Zhora", "Moscow");
+//        smad.put("Frank", "LA");
+//        smad.put("Randy", "NY");
+//        smad.put("Andrei", "St. Petersburg");
+//        smad.put("Zhora", "Goose-Khrustalny");
+//        smad.put("Jukka", "Imatra");
 //
-        System.out.println(mad.get("Zhora"));
-        System.out.println(mad.get("Randy"));
-
-
-//        mad.print();
-
-//        MyArrayDictionary<Integer> imad = new MyArrayDictionary<>();
+//        smad.put("Zhora", "Moscow");
 //
-//        for (int i = 1; i < 51; i++ ) {
-//            imad.put(i, i);
-//        }
+//        System.out.println(smad.get("Zhora"));
+//        System.out.println(smad.get("Randy"));
 
-//        imad.print();
+        MyArrayDictionary<Integer, Integer> imad = new MyArrayDictionary<>();
 
+        long start = System.nanoTime();
 
+        for (int i = 1; i < 21; i++) {
+            imad.put(i, i);
+            System.out.println(i);
+        }
+
+        long end = System.nanoTime();
+        System.out.println("Elapsed: " + (end - start));
+        System.out.println(imad.data.length);
 
 
 
