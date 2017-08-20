@@ -1,5 +1,6 @@
 package hw10lesson170809;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -86,6 +87,18 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
     public V get(K key) {
         Pair pair = getPair(key);
         return pair == null ? null : (V) pair.value;
+    }
+
+    public boolean del(K key) {
+        int index = hash(key);
+        Pair pair = getPair(key, index);
+
+        if (pair != null) {
+            data[index].remove(pair);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
