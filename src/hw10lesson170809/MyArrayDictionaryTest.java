@@ -9,20 +9,21 @@ import java.util.List;
 public class MyArrayDictionaryTest {
     public static void main(String[] args) {
 
-        MyArrayDictionary<String, Integer> mad = new MyArrayDictionary<>(10);
-
+        MyArrayDictionary<String, String> mad = new MyArrayDictionary<>();
 
 //        MyArrayDictionary<String> mad = new MyArrayDictionary<>();
 //
-//        mad.put("Frank", "LA");
-//        mad.put("Randy", "NY");
-//        mad.put("Andrei", "St. Petersburg");
-//        mad.put("Zhora", "Goose-Khrustalny");
-//        mad.put("Jukka", "Imatra");
+        mad.put("Frank", "LA");
+        mad.put("Randy", "NY");
+        mad.put("Andrei", "St. Petersburg");
+        mad.put("Zhora", "Goose-Khrustalny");
+        mad.put("Jukka", "Imatra");
+
+        mad.put("Zhora", "Moscow");
 //
-//        mad.put("Zhora", "Moscow");
-//
-//        System.out.println(mad.get("Zhora"));
+        System.out.println(mad.get("Zhora"));
+        System.out.println(mad.get("Randy"));
+
 
 //        mad.print();
 

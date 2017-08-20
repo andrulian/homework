@@ -1,5 +1,6 @@
 package hw10lesson170809;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -43,9 +44,10 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
         }
 
         Pair pair = getPair(key);
+//        System.out.println("PAIR: " + pair.key + pair.value);
 
         if (pair == null) {
-            list.add(pair);
+            list.add(new Pair(key, value));
         } else {
             pair.value = value;
         }
@@ -64,7 +66,7 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
             mad.put((K)pair.key, (V)pair.value);
         }
 
-        data = mad.data;
+        this.data = mad.data;
     }
 
     private int hash(K key) {
@@ -79,7 +81,6 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
 
 //    with index.
     private Pair getPair(K key, int index) {
-
         List<Pair> list = data[index];
 
         if (list == null) {return null;}
