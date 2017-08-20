@@ -17,20 +17,26 @@ public class MyArrayDictionaryTest {
         smad.put("Zhora", "Goose-Khrustalny");
         smad.put("Jukka", "Imatra");
 
+//        Zhora moves to Moscow
         smad.put("Zhora", "Moscow");
 
-        System.out.println(smad.get("Zhora"));
-        System.out.println(smad.get("Randy"));
+        System.out.println(Asserts.assertEquals(smad.get("Zhora"), "Moscow"));
+        System.out.println(Asserts.assertEquals(smad.get("Frank"), "LA"));
 
-        MyArrayDictionary<Integer, Integer> imad = new MyArrayDictionary<>();
-
-        System.out.println("Elapsed: " + benchmark(imad, 1_000));
-        System.out.println("Elapsed: " + benchmark(imad, 10_000));
-        System.out.println("Elapsed: " + benchmark(imad, 100_000));
+        System.out.println(Asserts.assertNotEquals(smad.get("Jukka"), "Tampere"));
 
 
-//        System.out.println(Asserts.assertEquals(MyArrayDictionary.remove(0), "elem_0"));
+
+
 //        System.out.println(Asserts.assertEquals(MyArrayDictionary.);
+
+
+//        MyArrayDictionary<Integer, Integer> imad = new MyArrayDictionary<>();
+
+//        System.out.println("Elapsed: " + benchmark(imad, 1_000));
+//        System.out.println("Elapsed: " + benchmark(imad, 10_000));
+//        System.out.println("Elapsed: " + benchmark(imad, 100_000));
+
     }
 
     private static <K, V> long benchmark(MyArrayDictionary mad, long value) {
