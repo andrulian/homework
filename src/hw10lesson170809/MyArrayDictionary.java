@@ -1,10 +1,8 @@
 package hw10lesson170809;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
-
 
 public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>{
     private int capacity;
@@ -51,7 +49,7 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
 
     private void resize() {
         if (data.length * LOAD_FACTOR <= capacity) {
-            System.out.println("====================================================");
+//            System.out.println("====================================================");
             MyArrayDictionary<K, V> mad = new MyArrayDictionary<>(data.length * 2);
 
             for (Pair pair : this) {
@@ -59,14 +57,14 @@ public class MyArrayDictionary<K, V> implements Iterable<MyArrayDictionary.Pair>
             }
 
             this.data = mad.data;
-            System.out.println("NEW CAPACITY: " + this.data.length);
+//            System.out.println("NEW CAPACITY: " + this.data.length);
         }
     }
 
     private int hash(K key) {
 //        TODO: Delete the following lines
         int h = key.hashCode() & 0x7FFFFFFF % data.length;
-        System.out.println("HASH FOR: " + key + " is " + h);
+//        System.out.println("HASH FOR: " + key + " is " + h);
 
         return key.hashCode() & 0x7FFFFFFF % data.length;
     }
