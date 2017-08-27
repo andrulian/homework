@@ -1,6 +1,6 @@
 package solitaire;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 class TablePile extends CardPile {
 

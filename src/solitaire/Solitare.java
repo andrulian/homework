@@ -1,6 +1,7 @@
 package solitaire;
 
-import java.awt.*;
+import java.awt.Event;
+import java.awt.Graphics;
 import java.applet.Applet;
 
 public class Solitare extends Applet {
