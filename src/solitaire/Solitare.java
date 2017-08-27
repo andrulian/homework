@@ -1,5 +1,8 @@
 package solitaire;
 
+import java.awt.*;
+import java.applet.Applet;
+
 class Card {
     // constructor
     Card (int sv, int rv) {
