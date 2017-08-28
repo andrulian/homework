@@ -5,14 +5,20 @@ import java.awt.Graphics;
 
 class CardPile {
 
-    CardPile (int xl, int yl) {
-        x = xl;
-        y = yl;
+    // coordinates of the card pile
+    protected int x;
+    protected int y;
+    private Card firstCard;
+
+    CardPile (int xCoord, int yCoord) {
+        x = xCoord;
+        y = yCoord;
         firstCard = null;
     }
 
     // access to cards are not overridden
 
+//    returns the first card's link in the pile (ON TOP)
     public Card top() { return firstCard; }
 
     public boolean empty() { return firstCard == null; }
@@ -28,11 +34,13 @@ class CardPile {
 
     // the following are sometimes overridden
 
-    public boolean includes (int tx, int ty) {
-        return x <= tx && tx <= x + Card.width &&
-                y <= ty && ty <= y + Card.height;
+    // if click was made in this. pile area
+    public boolean includes (int clickX, int clickY) {
+        return x <= clickX && clickX <= x + Card.width &&
+                y <= clickY && clickY <= y + Card.height;
     }
 
+//    clicked pile action:
     public void select (int tx, int ty) {
         // do nothing
     }
@@ -43,7 +51,7 @@ class CardPile {
     }
 
     public void display (Graphics g) {
-        g.setColor(Color.black);
+        g.setColor(Color.blue);
         if (firstCard == null)
             g.drawRect(x, y, Card.width, Card.height);
         else
@@ -53,9 +61,4 @@ class CardPile {
     public boolean canTake (Card aCard) {
         return false;
     }
-
-    // coordinates of the card pile
-    protected int x;
-    protected int y;
-    private Card firstCard;
 }

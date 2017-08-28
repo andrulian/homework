@@ -19,9 +19,13 @@ public class Solitare extends Applet {
         // then fill them in
         allPiles[0] = deckPile = new DeckPile(335, 5);
         allPiles[1] = discardPile = new DiscardPile(268, 5);
+
+//        make piles for suits
         for (int i = 0; i < 4; i++)
             allPiles[2+i] = suitPile[i] =
                     new SuitPile(15 + 60 * i, 5);
+
+//        make piles for tableau
         for (int i = 0; i < 7; i++)
             allPiles[6+i] = tableau[i] =
                     new TablePile(5 + 55 * i, 80, i+1);
@@ -32,11 +36,12 @@ public class Solitare extends Applet {
             allPiles[i].display(g);
     }
 
+//    Перебираются все стопки и у каждой спрашивается попадает ли клик в нее
     public boolean mouseDown(Event evt, int x, int y) {
         for (int i = 0; i < 13; i++)
             if (allPiles[i].includes(x, y)) {
                 allPiles[i].select(x, y);
-                repaint();
+                repaint(); // вызывает paint() и все стопки перерисовываются
                 return true;
             }
         return true;

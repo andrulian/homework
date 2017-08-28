@@ -6,9 +6,9 @@ class SuitPile extends CardPile {
 
     public boolean canTake (Card aCard) {
         if (empty())
-            return aCard.rank() == 0;
+            return aCard.getRank() == 0;
         Card topCard = top();
-        return (aCard.suit() == topCard.suit()) &&
-                (aCard.rank() == 1 + topCard.rank());
+        return (aCard.getSuit() == topCard.getSuit()) &&
+                (aCard.getRank() == 1 + topCard.getRank());
     }
 }
