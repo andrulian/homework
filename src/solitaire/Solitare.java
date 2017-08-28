@@ -35,8 +35,8 @@ public class Solitare extends Applet {
             allPiles[6+i] = tableau[i] =
                     new TablePile(5 + 55 * i, 80, i+1);
 
-        addMouseListener(new mouseClicks());
-        addMouseMotionListener(new mouseMotions());
+//        addMouseListener(new mouseClicks());
+//        addMouseMotionListener(new mouseMotions());
     }
 
     public void paint(Graphics g) {
