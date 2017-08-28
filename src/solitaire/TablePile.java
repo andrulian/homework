@@ -35,6 +35,7 @@ class TablePile extends CardPile {
 
         // if face down, then flip
         Card topCard = top();
+
         if (! topCard.isFaceUp()) {
             topCard.flip();
             return;
@@ -42,15 +43,19 @@ class TablePile extends CardPile {
 
         // else see if any getSuit pile can take card
         topCard = pop();
+
         for (int i = 0; i < 4; i++)
-            if (Solitare.suitPile[i].canTake(topCard)) {
+//            if (Solitare.suitPile[i].includes()) {
+            if (Solitare.suitPile[i].includes(Solitare.suitPile[i].x, Solitare.suitPile[i].y) && Solitare.suitPile[i].canTake(topCard)) {
                 Solitare.suitPile[i].addCard(topCard);
+                this.top().flip();
                 return;
             }
         // else see if any other table pile can take card
         for (int i = 0; i < 7; i++)
-            if (Solitare.tableau[i].canTake(topCard)) {
+            if (Solitare.tableau[i].includes(Solitare.tableau[i].x, Solitare.tableau[i].y) && Solitare.tableau[i].canTake(topCard)) {
                 Solitare.tableau[i].addCard(topCard);
+                this.top().flip();
                 return;
             }
         // else put it back on our pile

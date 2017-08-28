@@ -1,8 +1,10 @@
 package solitaire;
 
-import java.awt.Event;
-import java.awt.Graphics;
+import java.awt.*;
 import java.applet.Applet;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class Solitare extends Applet {
     static DeckPile deckPile;
@@ -12,6 +14,9 @@ public class Solitare extends Applet {
     static CardPile allPiles[];
 
     public void init() {
+        this.setSize(391, 450);
+//        this.setBackground(Color.DARK_GRAY);
+
         // first allocate the arrays
         allPiles = new CardPile[13];
         suitPile = new SuitPile[4];
@@ -29,6 +34,9 @@ public class Solitare extends Applet {
         for (int i = 0; i < 7; i++)
             allPiles[6+i] = tableau[i] =
                     new TablePile(5 + 55 * i, 80, i+1);
+
+        addMouseListener(new mouseClicks());
+        addMouseMotionListener(new mouseMotions());
     }
 
     public void paint(Graphics g) {
@@ -45,5 +53,29 @@ public class Solitare extends Applet {
                 return true;
             }
         return true;
+    }
+
+    private class mouseClicks extends MouseAdapter {
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            System.out.println("Released");
+            repaint();
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            if (e.getClickCount() == 2) {
+//                System.out.println("Clicked");
+//            }
+            System.out.println("Clicked");
+        }
+
+    }
+
+    private class mouseMotions extends MouseMotionAdapter {
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            System.out.println("Dragged");
+        }
     }
 }
