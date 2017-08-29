@@ -15,8 +15,8 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static SuitPile suitPile[];
     static CardPile allPiles[];
 
-    static Card temp;
-    static CardPile thisCP;
+    static Card temp; // picked card handler
+    static CardPile thisCP; // link on picked card pile
     static boolean clicked = false;
 
     public void init() {
@@ -45,8 +45,6 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
 
 //        addMouseListener(this); interfaces !!!!
 //        addMouseMotionListener(this);
-
-
     }
 
     public void paint(Graphics g) {
@@ -66,7 +64,6 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
         }
     }
 
-
 //    Перебираются все стопки и у каждой спрашивается попадает ли клик в нее
     public boolean mouseDown(Event evt, int x, int y) {
         for (int i = 0; i < 13; i++)
@@ -77,7 +74,6 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
             }
         return true;
     }
-
 
     private class mouseClicks extends MouseAdapter {
         @Override

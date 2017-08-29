@@ -62,6 +62,7 @@ class Card {
                 g.setColor(Color.black);
             g.drawString(names[getRank()], x+3, y+15);
 
+
             switch (getSuit()) {
                 case heart:
                     g.drawLine(x + 25, y + 30, x + 35, y + 20);

@@ -1,7 +1,6 @@
 package solitaire;
 
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
+import java.awt.*;
 
 class TablePile extends CardPile {
 
@@ -24,13 +23,8 @@ class TablePile extends CardPile {
                 (aCard.getRank() == topCard.getRank() - 1);
     }
 
-    public boolean includes(int tx, int clickY) {
-        // don't test bottom of card
-        return x <= tx && tx <= x + Card.width &&
-                y <= clickY;
-    }
 
-    //    рекурсивно рисуем со сдвигом
+    //    рекурсивно рисуем со сдвигом 35
     private int stackDisplay(Graphics g, Card aCard) {
         int localy;
         if (aCard == null)
@@ -47,13 +41,13 @@ class TablePile extends CardPile {
 //------------
 
     public void select(int tx, int ty) {
+        System.out.println("PILE LENGTH: " + this.pileLen);
+
         if (empty())
             return;
 
         Card topCard = top();
-//        CardPile thisCP = this;
 
-        // if face down, then flip
         if (!topCard.isFaceUp() && !Solitare.clicked) {
             topCard.flip();
             return;
@@ -72,7 +66,7 @@ class TablePile extends CardPile {
             }
         }
 
-        if (!Solitare.clicked) { //false
+        if (!Solitare.clicked && this.includes(tx, ty)) { //false
             System.out.println("FIRST. Clicked status: " + Solitare.clicked);
 
             for (int i = 0; i < 7; i++) {
@@ -89,7 +83,7 @@ class TablePile extends CardPile {
             }
         }
 
-        if (Solitare.clicked) { //true
+        if (Solitare.clicked && this.includes(tx, ty)) { //true
             System.out.println("CLICKED. Clicked status: " + Solitare.clicked);
 
             for (int i = 0; i < 7; i++) {
@@ -105,6 +99,14 @@ class TablePile extends CardPile {
                 Solitare.clicked = false;
             }
         }
+    }
+
+    @Override
+    public boolean includes (int clickX, int clickY) {
+        int topEdge = y + 35 * (this.pileLen - 1);
+        return x <= clickX && clickX <= x + Card.width &&
+                topEdge <= clickY && clickY <=  topEdge + Card.height;
+
     }
 }
 

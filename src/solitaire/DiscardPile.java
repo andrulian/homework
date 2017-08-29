@@ -19,6 +19,7 @@ class DiscardPile extends CardPile {
                 Solitare.suitPile[i].addCard(topCard);
                 return;
             }
+
         for (int i = 0; i < 7; i++)
             if (Solitare.tableau[i].canTake(topCard)) {
                 Solitare.tableau[i].addCard(topCard);

@@ -8,7 +8,9 @@ class CardPile {
     // coordinates of the card pile
     protected int x;
     protected int y;
-    private Card firstCard;
+    public Card firstCard;
+
+    public int pileLen;
 
     CardPile (int xCoord, int yCoord) {
         x = xCoord;
@@ -26,6 +28,7 @@ class CardPile {
     public Card pop() {
         Card result = null;
         if (firstCard != null) {
+            this.pileLen--;
             result = firstCard;
             firstCard = firstCard.link;
         }
@@ -36,6 +39,7 @@ class CardPile {
 
     // if click was made in this. pile area
     public boolean includes (int clickX, int clickY) {
+
         return x <= clickX && clickX <= x + Card.width &&
                 y <= clickY && clickY <= y + Card.height;
     }
@@ -46,6 +50,7 @@ class CardPile {
     }
 
     public void addCard (Card aCard) {
+        this.pileLen++;
         aCard.link = firstCard;
         firstCard = aCard;
     }
@@ -61,5 +66,6 @@ class CardPile {
     public boolean canTake (Card aCard) {
         return false;
     }
+
 
 }
