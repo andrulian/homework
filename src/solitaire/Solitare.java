@@ -15,7 +15,8 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static SuitPile suitPile[];
     static CardPile allPiles[];
 
-    static Card temp; // picked card handler
+    static Card temp; // picked card handler TODO: move functionality to tempPile!!!
+    static CardPile tempPile; // picked card handler
     static CardPile thisCP; // link on picked card pile
     static boolean clicked = false;
 

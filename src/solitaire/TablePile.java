@@ -41,7 +41,10 @@ class TablePile extends CardPile {
 //------------
 
     public void select(int tx, int ty) {
-        System.out.println("PILE LENGTH: " + this.pileLen);
+//        System.out.println("PILE LENGTH: " + this.getLen());
+//        System.out.println("CLOSED PILE LENGTH: " + this.getLen(false));
+
+
 
         if (empty())
             return;
@@ -99,14 +102,101 @@ class TablePile extends CardPile {
                 Solitare.clicked = false;
             }
         }
+
+//        group of cards
+        if (!Solitare.clicked && this.groupIncludes(tx, ty)) { //false
+            System.out.println("GROUP. Clicked status: " + Solitare.clicked);
+
+//            System.out.println("--> "  + getGroup());
+
+//            for (int i = 0; i < 7; i++) {
+//                if (Solitare.tableau[i].canTake(topCard)) {
+//                    System.out.println("CAN TAKE: " + i);
+//
+//                    Solitare.temp = pop();
+//                    Solitare.thisCP = this;
+//
+//                    Solitare.clicked = true;
+//                    System.out.println("clicked status: " + Solitare.clicked);
+//                    return;
+//                }
+//            }
+        }
+
+        if (Solitare.clicked && this.groupIncludes(tx, ty)) { //true
+            System.out.println("GROUP CLICKED. Clicked status: " + Solitare.clicked);
+//
+//            for (int i = 0; i < 7; i++) {
+//                if (Solitare.tableau[i].groupIncludes(tx, ty) && !Solitare.tableau[i].canTake(Solitare.temp)) {
+//                    Solitare.thisCP.addCard(Solitare.temp);
+//                }
+//
+//                if (Solitare.tableau[i].canTake(Solitare.temp) && Solitare.tableau[i].groupIncludes(tx, ty)) {
+//                    Solitare.tableau[i].addCard(Solitare.temp);
+//
+//                    if (!Solitare.thisCP.empty()) { Solitare.thisCP.top().flip(); }
+//                }
+//                Solitare.clicked = false;
+//            }
+        }
+
+
     }
 
-    @Override
+//    @Override
     public boolean includes (int clickX, int clickY) {
-        int topEdge = y + 35 * (this.pileLen - 1);
-        return x <= clickX && clickX <= x + Card.width &&
+        int topEdge = y + 35 * (this.getLen() - 1);
+        boolean res = x <= clickX && clickX <= x + Card.width &&
                 topEdge <= clickY && clickY <=  topEdge + Card.height;
+        return res ? res : groupIncludes(clickX, clickY);
 
     }
+
+    public boolean groupIncludes (int clickX, int clickY) {
+
+        int topEdge = y + 35 * this.getLen(false);
+        return x <= clickX && clickX <= x + Card.width &&
+                topEdge <= clickY && clickY <= topEdge + 35;
+
+    }
+
+    public int getLen(boolean all) {
+        int cnt = 0;
+        Card iter = this.top();
+
+        if (all) {
+            while (iter != null) {
+                iter = iter.link;
+                cnt++;
+            }
+
+            return cnt;
+        } else {
+            while (iter != null) {
+                if (!iter.isFaceUp()) { cnt++; }
+                iter = iter.link;
+            }
+
+            return cnt;
+        }
+
+    }
+
+    public int getLen() {
+        return this.getLen(true);
+    }
+
+    public void getGroup() {
+        Card iter = this.top();
+
+        while (iter.isFaceUp()) {
+            System.out.println("ITER");
+            iter = iter.link;
+
+            Solitare.tempPile.addCard(pop());
+        }
+    }
+
+
 }
 

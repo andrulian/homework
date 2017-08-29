@@ -10,7 +10,7 @@ class CardPile {
     protected int y;
     public Card firstCard;
 
-    public int pileLen;
+//    public int pileLen;
 
     CardPile (int xCoord, int yCoord) {
         x = xCoord;
@@ -28,7 +28,7 @@ class CardPile {
     public Card pop() {
         Card result = null;
         if (firstCard != null) {
-            this.pileLen--;
+//            this.pileLen--;
             result = firstCard;
             firstCard = firstCard.link;
         }
@@ -50,7 +50,7 @@ class CardPile {
     }
 
     public void addCard (Card aCard) {
-        this.pileLen++;
+//        this.pileLen++;
         aCard.link = firstCard;
         firstCard = aCard;
     }
