@@ -95,13 +95,14 @@ class TablePile extends CardPile {
             for (int i = 0; i < 7; i++) {
                 if (Solitare.tableau[i].includes(tx, ty) && !Solitare.tableau[i].canTake(Solitare.temp)) {
                     Solitare.thisCP.addCard(Solitare.temp);
-                    Solitare.clicked = false;
                 }
 
                 if (Solitare.tableau[i].canTake(Solitare.temp) && Solitare.tableau[i].includes(tx, ty)) {
                     Solitare.tableau[i].addCard(Solitare.temp);
-                    Solitare.clicked = false;
+
+                    if (!Solitare.thisCP.empty()) { Solitare.thisCP.top().flip(); }
                 }
+                Solitare.clicked = false;
             }
         }
     }
