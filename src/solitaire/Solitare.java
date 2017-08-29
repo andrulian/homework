@@ -16,6 +16,7 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static CardPile allPiles[];
 
     static Card temp;
+    static CardPile thisCP;
     static boolean clicked = false;
 
     public void init() {
