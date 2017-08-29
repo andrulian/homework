@@ -4,8 +4,9 @@ import java.awt.*;
 import java.applet.Applet;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//import java.awt.event.MouseListener;
-//import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 public class Solitare extends Applet{// implements MouseListener, MouseMotionListener {
     static DeckPile deckPile;
@@ -14,9 +15,11 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static SuitPile suitPile[];
     static CardPile allPiles[];
 
+    static Card temp;
+    static boolean clicked = false;
+
     public void init() {
         this.setSize(391, 450);
-//        this.setBackground(Color.DARK_GRAY);
 
         // first allocate the arrays
         allPiles = new CardPile[13];
@@ -62,6 +65,7 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
         }
     }
 
+
 //    Перебираются все стопки и у каждой спрашивается попадает ли клик в нее
     public boolean mouseDown(Event evt, int x, int y) {
         for (int i = 0; i < 13; i++)
@@ -77,22 +81,22 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     private class mouseClicks extends MouseAdapter {
         @Override
         public void mouseReleased(MouseEvent e) {
-            System.out.println("Released");
+//            System.out.println("Released");
             clickHandle(e);
             repaint();
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("Clicked");
+//            System.out.println("Clicked");
         }
 
     }
 
-//    private class mouseMotions extends MouseMotionAdapter {
-//        @Override
-//        public void mouseDragged(MouseEvent e) {
-//            System.out.println("Dragged");
-//        }
-//    }
+    private class mouseMotions extends MouseMotionAdapter {
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            System.out.println("Dragged");
+        }
+    }
 }

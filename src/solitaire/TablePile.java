@@ -1,6 +1,7 @@
 package solitaire;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 class TablePile extends CardPile {
 
@@ -33,21 +34,87 @@ class TablePile extends CardPile {
         if (empty())
             return;
 
-        // if face down, then flip
-        Card topCard = top();
+//        Card topCard = top();
+//
+//        // if face down, then flip
+//        if (!topCard.isFaceUp()) {
+//            topCard.flip();
+//            return;
+//        }
 
-        if (! topCard.isFaceUp()) {
-            topCard.flip();
-            return;
-        }
+//        Solitare.temp = topCard;
 
         // else see if any getSuit pile can take card
-        topCard = pop();
+//        topCard = pop();
 
+        if (!Solitare.clicked) {
+            System.out.println("FIRST. Clicked status: " + Solitare.clicked);
+
+//            for (int i = 0; i < 4; i++) {
+//
+//                if (Solitare.suitPile[i].canTake(topCard)) {
+////                    Solitare.suitPile[i].addCard(topCard);
+//                    Solitare.suitPile[i].select(tx, ty);
+////                    if (!this.top().isFaceUp()) {
+////                        this.top().flip();
+////                    }
+//
+//                    return;
+//                }
+//            }
+
+            Card topCard = top();
+
+            // if face down, then flip
+            if (!topCard.isFaceUp()) {
+                topCard.flip();
+                return;
+            }
+
+            Solitare.temp = topCard;
+
+            for (int i = 0; i < 7; i++) {
+                if (Solitare.tableau[i].canTake(topCard)) {
+                    System.out.println("CAN TAKE: " + i);
+                    Solitare.temp = topCard;
+                    Solitare.clicked = true;
+                    pop();
+                    System.out.println("clicked status: " + Solitare.clicked);
+
+//                    Solitare.tableau[i].addCard(topCard);
+//                    Solitare.tableau[i].select(tx, ty);
+//                    if (!this.top().isFaceUp()) {
+//                        this.top().flip();
+//                    }
+                    return;
+                }
+            }
+
+        } //else {Solitare.clicked = false;}
+
+        if (Solitare.clicked) {
+            System.out.println("CLICKED. Clicked status: " + Solitare.clicked);
+            for (int i = 0; i < 7; i++) {
+                if (Solitare.tableau[i].includes(tx, ty)) {
+//                    topCard = pop();
+//                    this.addCard(topCard);
+
+                    Solitare.tableau[i].addCard(Solitare.temp);
+//                    Solitare.tableau[i].addCard(topCard);
+
+
+//                    Solitare.temp = null;
+
+                    System.out.println("RIGHT");
+                    Solitare.clicked = false;
+                }
+            }
+
+
+        }
+
+        /*
         for (int i = 0; i < 4; i++) {
-
-            CardPile cardPile = new CardPile(x, y);
-            cardPile.addCard(topCard);
 
             if (Solitare.suitPile[i].canTake(topCard)) {
                 Solitare.suitPile[i].addCard(topCard);
@@ -62,9 +129,6 @@ class TablePile extends CardPile {
         // else see if any other table pile can take card
         for (int i = 0; i < 7; i++) {
 
-            CardPile cardPile = new CardPile(x, y);
-            cardPile.addCard(topCard);
-
             if (Solitare.tableau[i].canTake(topCard)) {
                 Solitare.tableau[i].addCard(topCard);
 
@@ -74,8 +138,11 @@ class TablePile extends CardPile {
                 return;
             }
         }
-        // else put it back on our pile
-        addCard(topCard);
+        // else put it back on our pile*/
+//        addCard(topCard);
+
+
+
     }
 
 //    рекурсивно рисуем со сдвигом

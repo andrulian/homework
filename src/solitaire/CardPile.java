@@ -61,4 +61,5 @@ class CardPile {
     public boolean canTake (Card aCard) {
         return false;
     }
+
 }
