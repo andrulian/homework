@@ -23,7 +23,7 @@ class Card {
     private int suit;
     private boolean faceup;
 
-    Card link;
+    Card nextLink;
     Card prevLink;
 
     // constructor

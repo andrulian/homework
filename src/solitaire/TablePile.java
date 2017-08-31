@@ -29,7 +29,7 @@ class TablePile extends CardPile {
         int localy;
         if (aCard == null)
             return y;
-        localy = stackDisplay(g, aCard.link);
+        localy = stackDisplay(g, aCard.nextLink);
         aCard.draw(g, x, localy);
         return localy + 35;
     }
@@ -41,15 +41,12 @@ class TablePile extends CardPile {
 //------------
 
     public void select(int tx, int ty) {
-//        System.out.println("PILE LENGTH: " + this.getLen());
-//        System.out.println("CLOSED PILE LENGTH: " + this.getLen(false));
-
-
 
         if (empty())
             return;
 
         Card topCard = top();
+
 
         if (!topCard.isFaceUp() && !Solitare.clicked) {
             topCard.flip();
@@ -69,147 +66,115 @@ class TablePile extends CardPile {
             }
         }
 
-        if (!Solitare.clicked && this.includes(tx, ty)) { //false
-            System.out.println("FIRST. Clicked status: " + Solitare.clicked);
+        for (int i = 0; i < 7; i++) {
+            if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.tempCard.cardHolder)) {
 
-            for (int i = 0; i < 7; i++) {
-                if (Solitare.tableau[i].canTake(topCard)) {
-                    System.out.println("CAN TAKE: " + i);
+                Solitare.tempCard.frameOff();
 
-                    Solitare.temp = pop();
-                    Solitare.thisCP = this;
+                Solitare.thisCP.firstCard = Solitare.tempCard.cardHolder.nextLink;
+                Solitare.thisCP.firstCard.flip();
 
-                    Solitare.clicked = true;
-                    System.out.println("clicked status: " + Solitare.clicked);
-                    return;
+                Solitare.tableau[i].addCard(Solitare.tempCard.cardHolder);
+            }
+
+            if (!Solitare.tempCard.stack.isEmpty()) {
+
+                if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.tempCard.stack.peek())) {
+
+                    Solitare.thisCP.firstCard = Solitare.tempCard.stack.peek().nextLink;
+                    Solitare.thisCP.firstCard.flip();
+
+                    while (!Solitare.tempCard.stack.isEmpty()) {
+                        System.out.println("-1");
+                        Solitare.tableau[i].addCard(Solitare.tempCard.stack.pop());
+
+
+                    }
+
+
                 }
+
             }
         }
 
-        if (Solitare.clicked && this.includes(tx, ty)) { //true
-            System.out.println("CLICKED. Clicked status: " + Solitare.clicked);
+        if (isOnTopCard(tx, ty)) {
+            Solitare.tempCard.frameOn();
+            Solitare.thisCP = this;
+            Solitare.tempCard.x = x;
+            Solitare.tempCard.y = (getLen() - 1) * 35 + y;
+            Solitare.tempCard.cardHolder = this.firstCard;
+        }
 
-            for (int i = 0; i < 7; i++) {
-                if (Solitare.tableau[i].includes(tx, ty) && !Solitare.tableau[i].canTake(Solitare.temp)) {
-                    Solitare.thisCP.addCard(Solitare.temp);
-                }
+        if (isOnGroupOfCards(tx, ty)) {
+            System.err.println("GROUP");
+            Solitare.tempCard.frameOn();
+            Solitare.thisCP = this;
+            Solitare.tempCard.x = x;
+            Solitare.tempCard.y = y + (getLen() - openedCards()) * 35;
+            Solitare.tempCard.recSize += (openedCards() - 1) + openedCards() * 35  - 35;
 
-                if (Solitare.tableau[i].canTake(Solitare.temp) && Solitare.tableau[i].includes(tx, ty)) {
-                    Solitare.tableau[i].addCard(Solitare.temp);
-
-                    if (!Solitare.thisCP.empty()) { Solitare.thisCP.top().flip(); }
-                }
-                Solitare.clicked = false;
+            while (topCard.isFaceUp()) {
+                Solitare.tempCard.stack.push(topCard);
+                System.out.println("+1");
+                topCard = topCard.nextLink;
             }
         }
-
-//        group of cards
-        if (!Solitare.clicked && this.groupIncludes(tx, ty)) { //false
-            System.out.println("GROUP. Clicked status: " + Solitare.clicked);
-
-//            System.out.println("--> "  + getGroup());
-            System.out.println("--> "  + Solitare.cnt);
-
-//            for (int i = 0; i < 7; i++) {
-//                if (Solitare.tableau[i].canTake(topCard)) {
-//                    System.out.println("CAN TAKE: " + i);
-//
-//                    Solitare.temp = pop();
-//                    Solitare.thisCP = this;
-//
-//                    Solitare.clicked = true;
-//                    System.out.println("clicked status: " + Solitare.clicked);
-//                    return;
-//                }
-//            }
-        }
-
-        if (Solitare.clicked && this.groupIncludes(tx, ty)) { //true
-            System.out.println("GROUP CLICKED. Clicked status: " + Solitare.clicked);
-//
-//            for (int i = 0; i < 7; i++) {
-//                if (Solitare.tableau[i].groupIncludes(tx, ty) && !Solitare.tableau[i].canTake(Solitare.temp)) {
-//                    Solitare.thisCP.addCard(Solitare.temp);
-//                }
-//
-//                if (Solitare.tableau[i].canTake(Solitare.temp) && Solitare.tableau[i].groupIncludes(tx, ty)) {
-//                    Solitare.tableau[i].addCard(Solitare.temp);
-//
-//                    if (!Solitare.thisCP.empty()) { Solitare.thisCP.top().flip(); }
-//                }
-//                Solitare.clicked = false;
-//            }
-        }
-
-
     }
 
-//    @Override
-    public boolean includes (int clickX, int clickY) {
+    @Override
+    public boolean includes (int tx, int ty) {
+        // don't test bottom of card
+        return x <= tx && tx <= x + Card.width &&
+                y <= ty;
+    }
+
+    public boolean isOnTopCard (int tx, int ty) {
+
         int topEdge = y + 35 * (this.getLen() - 1);
-        boolean res = x <= clickX && clickX <= x + Card.width &&
-                topEdge <= clickY && clickY <=  topEdge + Card.height;
-        return res;// ? res : groupIncludes(clickX, clickY);
-
+        return x <= tx && tx <= x + Card.width &&
+                topEdge <= ty && ty <= topEdge + Card.height;
     }
 
-    public boolean groupIncludes (int clickX, int clickY) {
+    public boolean isOnGroupOfCards (int tx, int ty) {
+        int facedUpCards = 0;
+        Card topCard = top();
 
-        int topEdge = y + 35 * this.getLen(false);
-        return x <= clickX && clickX <= x + Card.width &&
-                topEdge <= clickY && clickY <= topEdge + 35;
+        facedUpCards = openedCards();
 
-    }
-
-    public int getLen(boolean all) {
-        int cnt = 0;
-        Card iter = this.top();
-
-        if (all) {
-            while (iter != null) {
-                iter = iter.link;
-                cnt++;
-            }
-
-            return cnt;
-        } else {
-            while (iter != null) {
-                if (!iter.isFaceUp()) { cnt++; }
-                iter = iter.link;
-            }
-
-//            return cnt > 1 ? cnt: 0;
-            return cnt;
+        if (facedUpCards > 1) {
+            System.out.println(facedUpCards);
+            int topEdge = y + 35 * (this.getLen() - facedUpCards);
+            return x <= tx && tx <= x + Card.width &&
+                    topEdge <= ty && ty <= topEdge + 35;
         }
 
+        return false;
     }
 
     public int getLen() {
-        return this.getLen(true);
-    }
-
-    public boolean getGroup() {
+        int cnt = 0;
         Card iter = this.top();
 
-        System.err.println(iter.isFaceUp());
-
-        while (iter.isFaceUp()) {
-            System.out.println("ITER");
-//            pop();
-            TablePile tP = Solitare.tempPile;
-            tP.addCard(pop());
-//            Solitare.tempPile.addCard(pop());
-            Solitare.cnt++;
-            iter = iter.link;
-
-//            System.out.println("ITER 1.5") ;
-//            Card tt = pop();
-            System.out.println("ITER2");
+        while (iter != null) {
+            iter = iter.nextLink;
+            cnt++;
         }
 
-        return Solitare.tempPile == null ? false : true;
+        return cnt;
     }
 
+    public int openedCards () {
+        int facedUpCards = 0;
+        Card topCard = top();
+
+        if (topCard == null) { return 0; }
+        while (topCard != null && topCard.isFaceUp()) {
+
+            topCard = topCard.nextLink;
+            facedUpCards++;
+        }
+        return facedUpCards;
+    }
 
 }
 

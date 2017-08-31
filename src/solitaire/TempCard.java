@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Stack;
 
 //public class TempCard extends Card {
-public class TempCard { //extends LinkedList<Card> {
+public class TempCard  { //extends LinkedList<Card> {
     int x;
     int y;
     int recSize = 74;

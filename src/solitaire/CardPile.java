@@ -1,7 +1,6 @@
 package solitaire;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 class CardPile {
 
@@ -20,7 +19,7 @@ class CardPile {
 
     // access to cards are not overridden
 
-//    returns the first card's link in the pile (ON TOP)
+//    returns the first card's cardHolder in the pile (ON TOP)
     public Card top() { return firstCard; }
 
     public boolean empty() { return firstCard == null; }
@@ -30,7 +29,7 @@ class CardPile {
         if (firstCard != null) {
 //            this.pileLen--;
             result = firstCard;
-            firstCard = firstCard.link;
+            firstCard = firstCard.nextLink;
         }
         return result;
     }
@@ -51,7 +50,7 @@ class CardPile {
 
     public void addCard (Card aCard) {
 //        this.pileLen++;
-        aCard.link = firstCard;
+        aCard.nextLink = firstCard;
         firstCard = aCard;
     }
 

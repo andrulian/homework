@@ -1,12 +1,10 @@
 package solitaire;
 
-import java.awt.*;
 import java.applet.Applet;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 
 public class Solitare extends Applet{// implements MouseListener, MouseMotionListener {
     static DeckPile deckPile;
@@ -15,15 +13,17 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static SuitPile suitPile[];
     static CardPile allPiles[];
 
-    static int cnt;
-    static Card temp; // picked card handler TODO: move functionality to tempPile!!!
-    static TablePile tempPile; // picked card handler
-    static CardPile thisCP; // link on picked card pile
+    static TempPile tempPile; // picked card handler
+    static CardPile thisCP; // cardHolder on picked card pile
+    static TempCard tempCard;
     static boolean clicked = false; // temporary here
 
     public void init() {
+        setBackground(Color.lightGray);
         this.setSize(391, 450);
-
+//        tempPile = new TempPile(1,1);
+        tempPile = new TempPile(-100,-100);
+        tempCard = new TempCard();
         // first allocate the arrays
         allPiles = new CardPile[13];
         suitPile = new SuitPile[4];
@@ -52,6 +52,8 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     public void paint(Graphics g) {
         for (int i = 0; i < 13; i++)
             allPiles[i].display(g);
+            tempCard.display(g); // TODO condition if null
+            if(tempPile != null) {tempPile.display(g);}
     }
 
     public void clickHandle (MouseEvent e) {
@@ -64,25 +66,18 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
                 repaint();
             }
         }
-
-        for(TablePile tbl: tableau) {
-            if (tbl.groupIncludes(mX, mY)) {
-                tbl.select(mX, mY);
-                repaint();
-            }
-        }
     }
 
 //    Перебираются все стопки и у каждой спрашивается попадает ли клик в нее
-    public boolean mouseDown(Event evt, int x, int y) {
-        for (int i = 0; i < 13; i++)
-            if (allPiles[i].includes(x, y)) {
-                allPiles[i].select(x, y);
-                repaint(); // вызывает paint() и все стопки перерисовываются
-                return true;
-            }
-        return true;
-    }
+//    public boolean mouseDown(Event evt, int x, int y) {
+//        for (int i = 0; i < 13; i++)
+//            if (allPiles[i].includes(x, y)) {
+//                allPiles[i].select(x, y);
+//                repaint(); // вызывает paint() и все стопки перерисовываются
+//                return true;
+//            }
+//        return true;
+//    }
 
     private class mouseClicks extends MouseAdapter {
         @Override
