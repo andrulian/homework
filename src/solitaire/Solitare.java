@@ -15,10 +15,11 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static SuitPile suitPile[];
     static CardPile allPiles[];
 
+    static int cnt;
     static Card temp; // picked card handler TODO: move functionality to tempPile!!!
-    static CardPile tempPile; // picked card handler
+    static TablePile tempPile; // picked card handler
     static CardPile thisCP; // link on picked card pile
-    static boolean clicked = false;
+    static boolean clicked = false; // temporary here
 
     public void init() {
         this.setSize(391, 450);
@@ -63,6 +64,13 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
                 repaint();
             }
         }
+
+        for(TablePile tbl: tableau) {
+            if (tbl.groupIncludes(mX, mY)) {
+                tbl.select(mX, mY);
+                repaint();
+            }
+        }
     }
 
 //    Перебираются все стопки и у каждой спрашивается попадает ли клик в нее
@@ -80,13 +88,14 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
         @Override
         public void mouseReleased(MouseEvent e) {
 //            System.out.println("Released");
-            clickHandle(e);
-            repaint();
+
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
 //            System.out.println("Clicked");
+            clickHandle(e);
+            repaint();
         }
 
     }

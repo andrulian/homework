@@ -108,6 +108,7 @@ class TablePile extends CardPile {
             System.out.println("GROUP. Clicked status: " + Solitare.clicked);
 
 //            System.out.println("--> "  + getGroup());
+            System.out.println("--> "  + Solitare.cnt);
 
 //            for (int i = 0; i < 7; i++) {
 //                if (Solitare.tableau[i].canTake(topCard)) {
@@ -148,7 +149,7 @@ class TablePile extends CardPile {
         int topEdge = y + 35 * (this.getLen() - 1);
         boolean res = x <= clickX && clickX <= x + Card.width &&
                 topEdge <= clickY && clickY <=  topEdge + Card.height;
-        return res ? res : groupIncludes(clickX, clickY);
+        return res;// ? res : groupIncludes(clickX, clickY);
 
     }
 
@@ -177,6 +178,7 @@ class TablePile extends CardPile {
                 iter = iter.link;
             }
 
+//            return cnt > 1 ? cnt: 0;
             return cnt;
         }
 
@@ -186,15 +188,26 @@ class TablePile extends CardPile {
         return this.getLen(true);
     }
 
-    public void getGroup() {
+    public boolean getGroup() {
         Card iter = this.top();
+
+        System.err.println(iter.isFaceUp());
 
         while (iter.isFaceUp()) {
             System.out.println("ITER");
+//            pop();
+            TablePile tP = Solitare.tempPile;
+            tP.addCard(pop());
+//            Solitare.tempPile.addCard(pop());
+            Solitare.cnt++;
             iter = iter.link;
 
-            Solitare.tempPile.addCard(pop());
+//            System.out.println("ITER 1.5") ;
+//            Card tt = pop();
+            System.out.println("ITER2");
         }
+
+        return Solitare.tempPile == null ? false : true;
     }
 
 

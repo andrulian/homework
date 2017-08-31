@@ -1,7 +1,6 @@
 package solitaire;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 class Card {
 
@@ -25,6 +24,7 @@ class Card {
     private boolean faceup;
 
     Card link;
+    Card prevLink;
 
     // constructor
     Card (int sv, int rv) {
@@ -97,12 +97,15 @@ class Card {
             }
         }
         else { // face down
-            g.setColor(Color.yellow);
-            g.drawLine(x+15, y+5, x+15, y+65);
-            g.drawLine(x+35, y+5, x+35, y+65);
-            g.drawLine(x+5, y+20, x+45, y+20);
-            g.drawLine(x+5, y+35, x+45, y+35);
-            g.drawLine(x+5, y+50, x+45, y+50);
+
+            g.setColor(Color.magenta);
+            g.drawOval(x + 10, y + 20, 30, 30);
+
+//            g.drawLine(x+15, y+5, x+15, y+65);
+//            g.drawLine(x+35, y+5, x+35, y+65);
+//            g.drawLine(x+5, y+20, x+45, y+20);
+//            g.drawLine(x+5, y+35, x+45, y+35);
+//            g.drawLine(x+5, y+50, x+45, y+50);
         }
     }
 }
