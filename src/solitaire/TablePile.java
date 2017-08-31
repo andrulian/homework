@@ -48,7 +48,7 @@ class TablePile extends CardPile {
         Card topCard = top();
 
 
-        if (!topCard.isFaceUp() && !Solitare.clicked) {
+        if (!topCard.isFaceUp()) {
             topCard.flip();
             return;
         }
@@ -66,59 +66,56 @@ class TablePile extends CardPile {
             }
         }
 
-        for (int i = 0; i < 7; i++) {
-            if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.tempCard.cardHolder)) {
+        System.out.println("PRE Stack size:" + Solitare.tempCard.stack.size());
+        if (!Solitare.tempCard.stack.isEmpty()) {
+            System.err.println("NOT EMPTY");
 
-                Solitare.tempCard.frameOff();
-
-                Solitare.thisCP.firstCard = Solitare.tempCard.cardHolder.nextLink;
-                Solitare.thisCP.firstCard.flip();
-
-                Solitare.tableau[i].addCard(Solitare.tempCard.cardHolder);
-            }
-
-            if (!Solitare.tempCard.stack.isEmpty()) {
-
+            for (int i = 0; i < 7; i++) {
                 if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.tempCard.stack.peek())) {
+
+                    Solitare.tempCard.frameOff();
 
                     Solitare.thisCP.firstCard = Solitare.tempCard.stack.peek().nextLink;
                     Solitare.thisCP.firstCard.flip();
 
                     while (!Solitare.tempCard.stack.isEmpty()) {
-                        System.out.println("-1");
                         Solitare.tableau[i].addCard(Solitare.tempCard.stack.pop());
-
-
                     }
+                }
+            }
+        
+        } else {
+            Solitare.tempCard.frameOn();
+            Solitare.thisCP = this;
+            Solitare.tempCard.x = x;
+            int len = Solitare.tempCard.stack.size();
+            System.out.println("Stack size:" + len);
 
+            if (isOnTopCard(tx, ty)) {
+                System.out.println("call ONE");
 
+                //TODO
+                Solitare.tempCard.y = (len - 1) * 35 + y;
+                Solitare.tempCard.stack.push(this.firstCard);
+
+//                return;
+            }
+
+            
+            if (isOnGroupOfCards(tx, ty)) {
+                System.out.println("call MANY");
+                Solitare.tempCard.y = y + (len - openedCards()) * 35;
+                Solitare.tempCard.recSize += (openedCards() - 1) + openedCards() * 35 - 35;
+
+                while (topCard.isFaceUp()) {
+                    Solitare.tempCard.stack.push(topCard);
+                    topCard = topCard.nextLink;
                 }
 
+//                return;
             }
-        }
-
-        if (isOnTopCard(tx, ty)) {
-            Solitare.tempCard.frameOn();
-            Solitare.thisCP = this;
-            Solitare.tempCard.x = x;
-            Solitare.tempCard.y = (getLen() - 1) * 35 + y;
-            Solitare.tempCard.cardHolder = this.firstCard;
-        }
-
-        if (isOnGroupOfCards(tx, ty)) {
-            System.err.println("GROUP");
-            Solitare.tempCard.frameOn();
-            Solitare.thisCP = this;
-            Solitare.tempCard.x = x;
-            Solitare.tempCard.y = y + (getLen() - openedCards()) * 35;
-            Solitare.tempCard.recSize += (openedCards() - 1) + openedCards() * 35  - 35;
-
-            while (topCard.isFaceUp()) {
-                Solitare.tempCard.stack.push(topCard);
-                System.out.println("+1");
-                topCard = topCard.nextLink;
+            System.out.println("Stack size:" + len);
             }
-        }
     }
 
     @Override
@@ -129,21 +126,24 @@ class TablePile extends CardPile {
     }
 
     public boolean isOnTopCard (int tx, int ty) {
+        System.out.println("One");
 
-        int topEdge = y + 35 * (this.getLen() - 1);
+        if (size() == 0) {return false;}
+
+        int topEdge = y + 35 * (size() - 1);
         return x <= tx && tx <= x + Card.width &&
                 topEdge <= ty && ty <= topEdge + Card.height;
     }
 
     public boolean isOnGroupOfCards (int tx, int ty) {
-        int facedUpCards = 0;
-        Card topCard = top();
+        System.out.println("Group");
 
-        facedUpCards = openedCards();
+        if (size() == 0) {return false;}
+
+        int facedUpCards = openedCards();
 
         if (facedUpCards > 1) {
-            System.out.println(facedUpCards);
-            int topEdge = y + 35 * (this.getLen() - facedUpCards);
+            int topEdge = y + 35 * (size() - facedUpCards);
             return x <= tx && tx <= x + Card.width &&
                     topEdge <= ty && ty <= topEdge + 35;
         }
@@ -151,30 +151,22 @@ class TablePile extends CardPile {
         return false;
     }
 
-    public int getLen() {
-        int cnt = 0;
-        Card iter = this.top();
-
-        while (iter != null) {
-            iter = iter.nextLink;
-            cnt++;
-        }
-
-        return cnt;
-    }
-
     public int openedCards () {
         int facedUpCards = 0;
         Card topCard = top();
 
         if (topCard == null) { return 0; }
+
         while (topCard != null && topCard.isFaceUp()) {
 
             topCard = topCard.nextLink;
             facedUpCards++;
         }
+
         return facedUpCards;
     }
+
+
 
 }
 

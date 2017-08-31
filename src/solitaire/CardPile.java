@@ -66,5 +66,20 @@ class CardPile {
         return false;
     }
 
+    public int size () {
+        if (firstCard == null) {return 0;}
+
+        int count = 1;
+        Card card = firstCard;
+
+
+        while (card.nextLink != null) {
+            count++;
+            card = card.nextLink;
+        }
+
+        return count;
+    }
+
 
 }

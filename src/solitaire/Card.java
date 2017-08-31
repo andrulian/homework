@@ -24,7 +24,6 @@ class Card {
     private boolean faceup;
 
     Card nextLink;
-    Card prevLink;
 
     // constructor
     Card (int sv, int rv) {

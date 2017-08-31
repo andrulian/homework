@@ -13,16 +13,12 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static SuitPile suitPile[];
     static CardPile allPiles[];
 
-    static TempPile tempPile; // picked card handler
     static CardPile thisCP; // cardHolder on picked card pile
     static TempCard tempCard;
-    static boolean clicked = false; // temporary here
 
     public void init() {
         setBackground(Color.lightGray);
-        this.setSize(391, 450);
-//        tempPile = new TempPile(1,1);
-        tempPile = new TempPile(-100,-100);
+        this.setSize(391, 550);
         tempCard = new TempCard();
         // first allocate the arrays
         allPiles = new CardPile[13];
@@ -53,7 +49,6 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
         for (int i = 0; i < 13; i++)
             allPiles[i].display(g);
             tempCard.display(g); // TODO condition if null
-            if(tempPile != null) {tempPile.display(g);}
     }
 
     public void clickHandle (MouseEvent e) {

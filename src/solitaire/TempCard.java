@@ -31,6 +31,7 @@ public class TempCard  { //extends LinkedList<Card> {
     }
 
 
+
     public void frameOff() {
         clr = Color.lightGray;
     }
