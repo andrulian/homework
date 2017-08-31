@@ -88,7 +88,7 @@ class TablePile extends CardPile {
             Solitare.tempCard.frameOn();
             Solitare.thisCP = this;
             Solitare.tempCard.x = x;
-            int len = Solitare.tempCard.stack.size();
+            int len = size();
             System.out.println("Stack size:" + len);
 
             if (isOnTopCard(tx, ty)) {
