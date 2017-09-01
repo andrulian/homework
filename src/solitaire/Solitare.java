@@ -17,7 +17,7 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static TempCard tempCard;
 
     public void init() {
-        setBackground(Color.lightGray);
+//        setBackground(Color.lightGray);
         this.setSize(391, 550);
         tempCard = new TempCard();
         // first allocate the arrays

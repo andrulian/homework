@@ -5,18 +5,17 @@ import java.util.Stack;
 
 //public class TempCard extends Card {
 public class TempCard  { //extends LinkedList<Card> {
-    int x;
-    int y;
-    int recSize = 74;
+    int x, y;
+    int recSize = 70;
 
     Stack<Card> stack = new Stack<>();
 
-    Color clr = Color.lightGray;
+    Color clr = Color.blue;
 
-    Card cardHolder = new Card(100, 100);
+//    Card cardHolder = new Card(100, 100);
 
     TempCard() {
-        this(0, 100);
+        this(15, 5);
     }
 
     TempCard(int xCoord, int yCoord) {
@@ -27,13 +26,15 @@ public class TempCard  { //extends LinkedList<Card> {
 
     public void display (Graphics g) {
         g.setColor(clr);
-        g.drawRect(x - 2, y - 2, 54, recSize);
+        g.drawRect(x, y, 50, recSize);
     }
 
 
 
     public void frameOff() {
-        clr = Color.lightGray;
+        clr = Color.blue;
+        x = 15;
+        y = 5;
     }
 
     public void frameOn() {

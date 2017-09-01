@@ -68,7 +68,6 @@ class CardPile {
 
     public int size () {
         if (firstCard == null) {return 0;}
-
         int count = 1;
         Card card = firstCard;
 
@@ -77,7 +76,7 @@ class CardPile {
             count++;
             card = card.nextLink;
         }
-
+//        System.out.printf("count " + count);
         return count;
     }
 
