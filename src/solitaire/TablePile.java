@@ -23,7 +23,6 @@ class TablePile extends CardPile {
                 (aCard.getRank() == topCard.getRank() - 1);
     }
 
-
     //    рекурсивно рисуем со сдвигом 35
     private int stackDisplay(Graphics g, Card aCard) {
         int localy;
@@ -56,59 +55,57 @@ class TablePile extends CardPile {
         for (int i = 0; i < 4; i++) {
             if (Solitare.suitPile[i].canTake(topCard)) {
                 if (topCard.prevInDeck != null && !topCard.prevInDeck.isFaceUp()) {
-                    System.err.println("prevInDeck: " + topCard.prevInDeck);
                     topCard.prevInDeck.flip();
                 }
-
                 Solitare.suitPile[i].addCard(pop());
 
                 return;
             }
         }
 
-        if (!Solitare.tempCard.stack.isEmpty()) {
+        if (!Solitare.cardStore.stack.isEmpty()) {
             System.err.println("NOT EMPTY");
 
             for (int i = 0; i < 7; i++) {
-                if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.tempCard.stack.peek())) {
+                if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.cardStore.stack.peek())) {
 
-                    Solitare.tempCard.frameOff();
+                    Solitare.cardStore.frameOff();
 
                     if (Solitare.thisCP.size() == 1) {
                         Solitare.thisCP.firstInDeck = null;
                     } else {
-                        Solitare.thisCP.firstInDeck = Solitare.tempCard.stack.peek().prevInDeck;
+                        Solitare.thisCP.firstInDeck = Solitare.cardStore.stack.peek().prevInDeck;
                         Solitare.thisCP.firstInDeck.flip();
                     }
 
-                    while (!Solitare.tempCard.stack.isEmpty()) {
-                        Solitare.tableau[i].addCard(Solitare.tempCard.stack.pop());
+                    while (!Solitare.cardStore.stack.isEmpty()) {
+                        Solitare.tableau[i].addCard(Solitare.cardStore.stack.pop());
                     }
                 }
             }
 
-            Solitare.tempCard.frameOff();
-            Solitare.tempCard.stack.clear();
+            Solitare.cardStore.frameOff();
+            Solitare.cardStore.stack.clear();
 
         } else { //if empty
-            Solitare.tempCard.frameOn();
+            Solitare.cardStore.frameOn();
             Solitare.thisCP = this;
-            Solitare.tempCard.x = x;
+            Solitare.cardStore.x = x;
             int len = size();
 
             if (isOnTopCard(tx, ty)) {
                 //TODO
-                Solitare.tempCard.y = (len - 1) * 35 + y;
-                Solitare.tempCard.stack.push(this.firstInDeck);
+                Solitare.cardStore.y = (len - 1) * 35 + y;
+                Solitare.cardStore.stack.push(this.firstInDeck);
             }
             
             if (isOnGroupOfCards(tx, ty)) {
                 System.out.println("call MANY");
-                Solitare.tempCard.y = y + (len - openedCards()) * 35;
-                Solitare.tempCard.recSize += (openedCards() - 1) + openedCards() * 35 - 36;
+                Solitare.cardStore.y = y + (len - openedCards()) * 35;
+                Solitare.cardStore.recSize += (openedCards() - 1) + openedCards() * 35 - 36;
 
                 while ( topCard.isFaceUp()) {
-                    Solitare.tempCard.stack.push(topCard);
+                    Solitare.cardStore.stack.push(topCard);
                     if (topCard.prevInDeck == null) {break;}
                     topCard = topCard.prevInDeck;
                 }

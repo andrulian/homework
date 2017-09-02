@@ -31,7 +31,6 @@ class DeckPile extends CardPile {
 
     public void select(int tx, int ty) {
         if (empty()) {
-            System.err.println(Solitare.allPiles[0].getClass());
 
             while (!Solitare.discardPile.empty()) {
                 Card card = Solitare.allPiles[1].pop();

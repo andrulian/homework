@@ -3,8 +3,7 @@ package solitaire;
 import java.awt.*;
 import java.util.Stack;
 
-//public class TempCard extends Card {
-public class TempCard  { //extends LinkedList<Card> {
+public class CardStore {
     int x, y;
     int recSize = 70;
 
@@ -12,13 +11,11 @@ public class TempCard  { //extends LinkedList<Card> {
 
     Color clr = Color.blue;
 
-//    Card cardHolder = new Card(100, 100);
-
-    TempCard() {
+    CardStore() {
         this(15, 5);
     }
 
-    TempCard(int xCoord, int yCoord) {
+    CardStore(int xCoord, int yCoord) {
         x = xCoord;
         y = yCoord;
 
@@ -28,8 +25,6 @@ public class TempCard  { //extends LinkedList<Card> {
         g.setColor(clr);
         g.drawRect(x, y, 50, recSize);
     }
-
-
 
     public void frameOff() {
         clr = Color.blue;

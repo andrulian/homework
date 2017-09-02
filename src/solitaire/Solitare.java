@@ -14,12 +14,12 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     static CardPile allPiles[];
 
     static CardPile thisCP; // cardHolder on picked card pile
-    static TempCard tempCard;
+    static CardStore cardStore;
 
     public void init() {
 //        setBackground(Color.lightGray);
         this.setSize(391, 550);
-        tempCard = new TempCard();
+        cardStore = new CardStore();
         // first allocate the arrays
         allPiles = new CardPile[13];
         suitPile = new SuitPile[4];
@@ -33,7 +33,6 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
             allPiles[2+i] = suitPile[i] =
                     new SuitPile(15 + 60 * i, 5);
 
-//        make piles for tableau
         for (int i = 0; i < 7; i++)
             allPiles[6+i] = tableau[i] =
                     new TablePile(5 + 55 * i, 80, i+1);
@@ -48,7 +47,7 @@ public class Solitare extends Applet{// implements MouseListener, MouseMotionLis
     public void paint(Graphics g) {
         for (int i = 0; i < 13; i++)
             allPiles[i].display(g);
-            tempCard.display(g); // TODO condition if null
+            cardStore.display(g); // TODO condition if null
     }
 
     public void clickHandle (MouseEvent e) {
