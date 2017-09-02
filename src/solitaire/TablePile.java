@@ -66,7 +66,6 @@ class TablePile extends CardPile {
             }
         }
 
-
         if (!Solitare.tempCard.stack.isEmpty()) {
             System.err.println("NOT EMPTY");
 
@@ -75,28 +74,22 @@ class TablePile extends CardPile {
 
                     Solitare.tempCard.frameOff();
 
-                    while (!Solitare.tempCard.stack.isEmpty()) {
-                        Solitare.tableau[i].addCard(Solitare.tempCard.stack.pop());
-                    }
-
-                    //TODO 
-                    System.err.println("size" + size());
-
                     if (Solitare.thisCP.size() == 1) {
                         Solitare.thisCP.firstCard = null;
                     } else {
                         Solitare.thisCP.firstCard = Solitare.tempCard.stack.peek().nextLink;
                         Solitare.thisCP.firstCard.flip();
+                    }
 
+                    while (!Solitare.tempCard.stack.isEmpty()) {
+                        Solitare.tableau[i].addCard(Solitare.tempCard.stack.pop());
                     }
                 }
             }
 
             Solitare.tempCard.frameOff();
             Solitare.tempCard.stack.clear();
-            System.out.println("Cleared? Stack size:" + Solitare.tempCard.stack.size());
 
-        
         } else { //if empty
             Solitare.tempCard.frameOn();
             Solitare.thisCP = this;
@@ -104,46 +97,32 @@ class TablePile extends CardPile {
             int len = size();
 
             if (isOnTopCard(tx, ty)) {
-                System.out.println("call ONE " + len);
-
                 //TODO
                 Solitare.tempCard.y = (len - 1) * 35 + y;
                 Solitare.tempCard.stack.push(this.firstCard);
-
-//                return;
             }
-
             
             if (isOnGroupOfCards(tx, ty)) {
                 System.out.println("call MANY");
                 Solitare.tempCard.y = y + (len - openedCards()) * 35;
-                Solitare.tempCard.recSize += (openedCards() - 1) + openedCards() * 35 - 35;
+                Solitare.tempCard.recSize += (openedCards() - 1) + openedCards() * 35 - 36;
 
                 while ( topCard.isFaceUp()) {
                     Solitare.tempCard.stack.push(topCard);
                     if (topCard.nextLink == null) {break;}
                     topCard = topCard.nextLink;
                 }
-
-//                return;
             }
-
-
-//            Solitare.tempCard.frameOff();
-//            Solitare.tempCard.stack.clear();
-            }
+        }
     }
 
     @Override
     public boolean includes (int tx, int ty) {
-        // don't test bottom of card
         return x <= tx && tx <= x + Card.width &&
                 y <= ty;
     }
 
     public boolean isOnTopCard (int tx, int ty) {
-//        System.out.println("One");
-
         if (size() == 0) {return false;}
 
         int topEdge = y + 35 * (size() - 1);
@@ -152,8 +131,6 @@ class TablePile extends CardPile {
     }
 
     public boolean isOnGroupOfCards (int tx, int ty) {
-//        System.out.println("Group");
-
         if (size() == 0) {return false;}
 
         int facedUpCards = openedCards();
@@ -181,8 +158,5 @@ class TablePile extends CardPile {
 
         return facedUpCards;
     }
-
-
-
 }
 

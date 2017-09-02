@@ -35,6 +35,8 @@ public class TempCard  { //extends LinkedList<Card> {
         clr = Color.blue;
         x = 15;
         y = 5;
+        recSize = 70;
+
     }
 
     public void frameOn() {
