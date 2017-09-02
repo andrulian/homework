@@ -23,7 +23,7 @@ class Card {
     private int suit;
     private boolean faceup;
 
-    Card nextLink;
+    Card prevInDeck;
 
     // constructor
     Card (int sv, int rv) {

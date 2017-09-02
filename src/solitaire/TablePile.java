@@ -29,7 +29,7 @@ class TablePile extends CardPile {
         int localy;
         if (aCard == null)
             return y;
-        localy = stackDisplay(g, aCard.nextLink);
+        localy = stackDisplay(g, aCard.prevInDeck);
         aCard.draw(g, x, localy);
         return localy + 35;
     }
@@ -54,13 +54,13 @@ class TablePile extends CardPile {
         }
 
         for (int i = 0; i < 4; i++) {
-
             if (Solitare.suitPile[i].canTake(topCard)) {
-                Solitare.suitPile[i].addCard(pop());
-
-                if (firstCard.nextLink != null && !this.top().isFaceUp()) {
-                    this.top().flip();
+                if (topCard.prevInDeck != null && !topCard.prevInDeck.isFaceUp()) {
+                    System.err.println("prevInDeck: " + topCard.prevInDeck);
+                    topCard.prevInDeck.flip();
                 }
+
+                Solitare.suitPile[i].addCard(pop());
 
                 return;
             }
@@ -75,10 +75,10 @@ class TablePile extends CardPile {
                     Solitare.tempCard.frameOff();
 
                     if (Solitare.thisCP.size() == 1) {
-                        Solitare.thisCP.firstCard = null;
+                        Solitare.thisCP.firstInDeck = null;
                     } else {
-                        Solitare.thisCP.firstCard = Solitare.tempCard.stack.peek().nextLink;
-                        Solitare.thisCP.firstCard.flip();
+                        Solitare.thisCP.firstInDeck = Solitare.tempCard.stack.peek().prevInDeck;
+                        Solitare.thisCP.firstInDeck.flip();
                     }
 
                     while (!Solitare.tempCard.stack.isEmpty()) {
@@ -99,7 +99,7 @@ class TablePile extends CardPile {
             if (isOnTopCard(tx, ty)) {
                 //TODO
                 Solitare.tempCard.y = (len - 1) * 35 + y;
-                Solitare.tempCard.stack.push(this.firstCard);
+                Solitare.tempCard.stack.push(this.firstInDeck);
             }
             
             if (isOnGroupOfCards(tx, ty)) {
@@ -109,8 +109,8 @@ class TablePile extends CardPile {
 
                 while ( topCard.isFaceUp()) {
                     Solitare.tempCard.stack.push(topCard);
-                    if (topCard.nextLink == null) {break;}
-                    topCard = topCard.nextLink;
+                    if (topCard.prevInDeck == null) {break;}
+                    topCard = topCard.prevInDeck;
                 }
             }
         }
@@ -152,7 +152,7 @@ class TablePile extends CardPile {
 
         while (topCard != null && topCard.isFaceUp()) {
 
-            topCard = topCard.nextLink;
+            topCard = topCard.prevInDeck;
             facedUpCards++;
         }
 

@@ -7,29 +7,23 @@ class CardPile {
     // coordinates of the card pile
     protected int x;
     protected int y;
-    public Card firstCard;
-
-//    public int pileLen;
+    public Card firstInDeck;
 
     CardPile (int xCoord, int yCoord) {
         x = xCoord;
         y = yCoord;
-        firstCard = null;
+        firstInDeck = null;
     }
 
-    // access to cards are not overridden
+    public Card top() { return firstInDeck; }
 
-//    returns the first card's cardHolder in the pile (ON TOP)
-    public Card top() { return firstCard; }
-
-    public boolean empty() { return firstCard == null; }
+    public boolean empty() { return firstInDeck == null; }
 
     public Card pop() {
         Card result = null;
-        if (firstCard != null) {
-//            this.pileLen--;
-            result = firstCard;
-            firstCard = firstCard.nextLink;
+        if (firstInDeck != null) {
+            result = firstInDeck;
+            firstInDeck = firstInDeck.prevInDeck;
         }
         return result;
     }
@@ -50,16 +44,16 @@ class CardPile {
 
     public void addCard (Card aCard) {
 //        this.pileLen++;
-        aCard.nextLink = firstCard;
-        firstCard = aCard;
+        aCard.prevInDeck = firstInDeck;
+        firstInDeck = aCard;
     }
 
     public void display (Graphics g) {
         g.setColor(Color.blue);
-        if (firstCard == null)
+        if (firstInDeck == null)
             g.drawRect(x, y, Card.width, Card.height);
         else
-            firstCard.draw(g, x, y);
+            firstInDeck.draw(g, x, y);
     }
 
     public boolean canTake (Card aCard) {
@@ -67,14 +61,14 @@ class CardPile {
     }
 
     public int size () {
-        if (firstCard == null) {return 0;}
+        if (firstInDeck == null) {return 0;}
         int count = 1;
-        Card card = firstCard;
+        Card card = firstInDeck;
 
 
-        while (card.nextLink != null) {
+        while (card.prevInDeck != null) {
             count++;
-            card = card.nextLink;
+            card = card.prevInDeck;
         }
 //        System.out.printf("count " + count);
         return count;
