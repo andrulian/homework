@@ -99,12 +99,6 @@ class Card {
 
             g.setColor(Color.magenta);
             g.drawOval(x + 10, y + 20, 30, 30);
-
-//            g.drawLine(x+15, y+5, x+15, y+65);
-//            g.drawLine(x+35, y+5, x+35, y+65);
-//            g.drawLine(x+5, y+20, x+45, y+20);
-//            g.drawLine(x+5, y+35, x+45, y+35);
-//            g.drawLine(x+5, y+50, x+45, y+50);
         }
     }
 }

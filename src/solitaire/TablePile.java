@@ -3,6 +3,7 @@ package solitaire;
 import java.awt.*;
 
 class TablePile extends CardPile {
+    CardStorage cs = Solitare.cardStorage;
 
     TablePile(int x, int y, int c) {
         // initialize the parent class
@@ -62,51 +63,50 @@ class TablePile extends CardPile {
             }
         }
 
-        if ( !Solitare.cardStore.stack.isEmpty()) {//not empty
-            System.out.println("Stack has: " + Solitare.cardStore.stack.size());
+        if ( !cs.isHandFree()) { // stack is not empty
+            System.out.println("Stack has: " + cs.cardsInHand());
 
             for (int i = 0; i < 7; i++) {
-                if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(Solitare.cardStore.stack.peek())) {
+                if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(cs.peekCard())) {
 
 
-                    System.out.println("pickedCardPile.size() IS " + Solitare.pickedCardPile.size());
-                    System.out.println("CardStore STACK.size() IS " + Solitare.cardStore.stack.size());
-                    if (Solitare.pickedCardPile.size() == 1) {
-                        Solitare.pickedCardPile.firstInDeck = null;
+                    System.out.println("pickedCardPile.size() IS " + cs.pickedCardPile.size());
+                    System.out.println("CardStorage STACK.size() IS " + cs.cardsInHand());
+                    if (cs.pickedCardPile.size() == 1) {
+                        cs.pickedCardPile.firstInDeck = null;
                         System.out.println("YEP");
                     } else {
-                        Solitare.pickedCardPile.firstInDeck = Solitare.cardStore.stack.peek().prevInDeck;
-                        Solitare.pickedCardPile.firstInDeck.flip();
+                        System.out.println("TRY FOR ELSE");
+                        cs.pickedCardPile.firstInDeck = cs.peekCard().prevInDeck;
+                        cs.pickedCardPile.firstInDeck.flip();
                     }
 
-                    while (!Solitare.cardStore.stack.isEmpty()) {
-                        Solitare.tableau[i].addCard(Solitare.cardStore.stack.pop());
+                    while (!cs.isHandFree()) {
+                        Solitare.tableau[i].addCard(cs.putCard());
                     }
                 }
             }
 
-            Solitare.cardStore.frameOff();
+            cs.frameOff();
 
-        } else { //empty
-            Solitare.cardStore.frameOn();
-            Solitare.pickedCardPile = this;
-            Solitare.cardStore.x = x;
+        } else { // empty
+            cs.pickedCardPile = this;
             int len = size();
 
             if (isOnTopCard(tx, ty)) {
-                Solitare.cardStore.y = (len - 1) * 35 + y;
-                Solitare.cardStore.stack.push(topCard);
-                System.out.println("" + Solitare.cardStore.stack.size() + " card(s) has pushed to stack");
+                cs.setCoord(x, (len - 1) * 35 + y);
+                cs.takeCard(topCard);
+                System.out.println("" + cs.cardsInHand() + " card(s) has pushed to stack");
 
             }
             
             if (isOnGroupOfCards(tx, ty)) {
                 System.out.println("call MANY");
-                Solitare.cardStore.y = y + (len - openedCards()) * 35;
-                Solitare.cardStore.recSize += (openedCards() - 1) + openedCards() * 35 - 36;
+                cs.setCoord(x, y + (len - openedCards()) * 35);
+                cs.recSize += (openedCards() - 1) + openedCards() * 35 - 36;
 
                 while (topCard.isFaceUp()) {
-                    Solitare.cardStore.stack.push(topCard);
+                    cs.takeCard(topCard);
                     if (topCard.prevInDeck == null) {break;}
                     topCard = topCard.prevInDeck;
                 }
