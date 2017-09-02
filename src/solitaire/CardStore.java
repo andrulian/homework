@@ -18,7 +18,6 @@ public class CardStore {
     CardStore(int xCoord, int yCoord) {
         x = xCoord;
         y = yCoord;
-
     }
 
     public void display (Graphics g) {
@@ -27,10 +26,12 @@ public class CardStore {
     }
 
     public void frameOff() {
-        clr = Color.blue;
         x = 15;
         y = 5;
         recSize = 70;
+        clr = Color.blue;
+        stack.clear();
+        System.out.println("From stack: " + stack.size());
 
     }
 
