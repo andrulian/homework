@@ -67,7 +67,7 @@ class TablePile extends CardPile {
             System.out.println("Stack has: " + cs.cardsInHand());
 
             for (int i = 0; i < 7; i++) {
-                if (Solitare.tableau[i].isOnTopCard(tx, ty) && Solitare.tableau[i].canTake(cs.peekCard())) {
+                if (Solitare.tableau[i].isClickOnTopCard(tx, ty) && Solitare.tableau[i].canTake(cs.peekCard())) {
 
 
                     System.out.println("pickedCardPile.size() IS " + cs.pickedCardPile.size());
@@ -93,14 +93,14 @@ class TablePile extends CardPile {
             cs.pickedCardPile = this;
             int len = size();
 
-            if (isOnTopCard(tx, ty)) {
+            if (isClickOnTopCard(tx, ty)) {
                 cs.setCoord(x, (len - 1) * 35 + y);
                 cs.takeCard(topCard);
                 System.out.println("" + cs.cardsInHand() + " card(s) has pushed to stack");
 
             }
             
-            if (isOnGroupOfCards(tx, ty)) {
+            if (isClickOnGroupOfCards(tx, ty)) {
                 System.out.println("call MANY");
                 cs.setCoord(x, y + (len - openedCards()) * 35);
                 cs.recSize += (openedCards() - 1) + openedCards() * 35 - 36;
@@ -122,7 +122,7 @@ class TablePile extends CardPile {
                 y <= ty;
     }
 
-    public boolean isOnTopCard (int tx, int ty) {
+    public boolean isClickOnTopCard(int tx, int ty) {
         if (size() == 0) {return false;}
 
         int topEdge = y + 35 * (size() - 1);
@@ -130,7 +130,7 @@ class TablePile extends CardPile {
                 topEdge <= ty && ty <= topEdge + Card.height;
     }
 
-    public boolean isOnGroupOfCards (int tx, int ty) {
+    public boolean isClickOnGroupOfCards(int tx, int ty) {
         if (size() == 0) {return false;}
 
         int facedUpCards = openedCards();

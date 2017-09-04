@@ -12,21 +12,14 @@ public class CardStorage {
 
     CardPile pickedCardPile;
 
-//    CardStorage() {
-//        this(15, 5);
-//    }
-
-//    CardStorage(int xCoord, int yCoord) {
-//        x = xCoord;
-//        y = yCoord;
-//    }
 
     public void frameOff() {
         x = 15;
         y = 5;
         recSize = 70;
         clr = Color.blue;
-//        stack.clear();
+        System.out.println("Clearing stack....");
+        stack.clear();
         System.out.println("From stack: " + stack.size());
     }
 
@@ -45,7 +38,7 @@ public class CardStorage {
     }
 
     public Card putCard () {
-        if (!stack.isEmpty()) { frameOff(); }
+//        if (!stack.isEmpty()) { frameOff(); }
         return stack.pop();
     }
 
