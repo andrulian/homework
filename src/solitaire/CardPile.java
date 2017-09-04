@@ -74,5 +74,20 @@ class CardPile {
         return count;
     }
 
+    public int openedCards () {
+        int facedUpCards = 0;
+        Card topCard = top();
+
+        if (topCard == null) { return 0; }
+
+        while (topCard != null && topCard.isFaceUp()) {
+
+            topCard = topCard.prevInDeck;
+            facedUpCards++;
+        }
+
+        return facedUpCards;
+    }
+
 
 }

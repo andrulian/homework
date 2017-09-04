@@ -40,6 +40,7 @@ public class CardStorage {
     public Card putCard () {
 //        if (!stack.isEmpty()) { frameOff(); }
         return stack.pop();
+
     }
 
     public Card peekCard () {

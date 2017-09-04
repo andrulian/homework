@@ -72,7 +72,8 @@ class TablePile extends CardPile {
 
                     System.out.println("pickedCardPile.size() IS " + cs.pickedCardPile.size());
                     System.out.println("CardStorage STACK.size() IS " + cs.cardsInHand());
-                    if (cs.pickedCardPile.size() == 1) {
+                    // if peeked pile has only one or many open cards.
+                    if (cs.pickedCardPile.size() == 1  || cs.pickedCardPile.openedCards() == cs.pickedCardPile.size()) {
                         cs.pickedCardPile.firstInDeck = null;
                         System.out.println("YEP");
                     } else {
@@ -144,19 +145,19 @@ class TablePile extends CardPile {
         return false;
     }
 
-    public int openedCards () {
-        int facedUpCards = 0;
-        Card topCard = top();
-
-        if (topCard == null) { return 0; }
-
-        while (topCard != null && topCard.isFaceUp()) {
-
-            topCard = topCard.prevInDeck;
-            facedUpCards++;
-        }
-
-        return facedUpCards;
-    }
+//    public int openedCards () {
+//        int facedUpCards = 0;
+//        Card topCard = top();
+//
+//        if (topCard == null) { return 0; }
+//
+//        while (topCard != null && topCard.isFaceUp()) {
+//
+//            topCard = topCard.prevInDeck;
+//            facedUpCards++;
+//        }
+//
+//        return facedUpCards;
+//    }
 }
 
