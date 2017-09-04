@@ -90,14 +90,14 @@ class TablePile extends CardPile {
 
             cs.frameOff();
 
-        } else { // empty
+        } else { // stack is empty
             cs.pickedCardPile = this;
             int len = size();
 
             if (isClickOnTopCard(tx, ty)) {
                 cs.setCoord(x, (len - 1) * 35 + y);
                 cs.takeCard(topCard);
-                System.out.println("" + cs.cardsInHand() + " card(s) has pushed to stack");
+                System.out.println("" + cs.cardsInHand() + " card has pushed to stack");
 
             }
             
@@ -112,7 +112,7 @@ class TablePile extends CardPile {
                     topCard = topCard.prevInDeck;
                 }
 
-                System.out.println("Many card has pushed to stack");
+                System.out.println("Many cards has pushed to stack");
             }
         }
     }
