@@ -12,7 +12,6 @@ public class CardStorage {
 
     CardPile pickedCardPile;
 
-
     public void frameOff() {
         x = 15;
         y = 5;
