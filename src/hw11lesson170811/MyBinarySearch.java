@@ -1,13 +1,10 @@
 package hw11lesson170811;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 public class MyBinarySearch {
     public static int binarySearch(int[] arr, int key) {
         int lo = 0, hi = arr.length - 1;
-//        int lo = 0, hi = arr.size() - 1;
 
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
@@ -17,6 +14,20 @@ public class MyBinarySearch {
             else return mid;
         }
 
-        return lo;
+        return  -(lo + 1);
+    }
+
+    public static void main(String[] args) {
+        int[] arrL = new int[10];
+
+        for (int i = 0; i < 10; i++) {
+            arrL[i] = i * 2;
+        }
+        System.out.println("array: " + Arrays.toString(arrL));
+
+        System.out.println("Looking for 9: " + binarySearch(arrL, 9));
+        System.out.println("Looking for -5: " + binarySearch(arrL, -5));
+        System.out.println("Looking for 12: " + binarySearch(arrL, 12));
+        System.out.println("Looking for 122: " + binarySearch(arrL, 122));
     }
 }
