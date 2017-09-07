@@ -35,6 +35,7 @@ public class ListVsArrayVsSet {
 
         total = 0;
         searchResult = 0;
+
         System.out.println("-=Linked list=-");
         System.out.println("Filled: " + fillTimer(linkl) + " ms ");
         System.out.println("Sorted in " + sortTimer(linkl) + " ms");
@@ -53,6 +54,22 @@ public class ListVsArrayVsSet {
                 "\n              Item: " + item  +
                 "\n              Time: " + searchTimer(arrl, item) + " ms" +
                 "\n              Result: " + searchResult);
+
+        System.out.println("Total time: " + (total) + " ms.\n");
+
+        total = 0;
+        searchResult = 0;
+        System.out.println("-=Tree set=-");
+        System.out.println("Filled: " + fillTimer(set) + " ms ");
+        System.out.println("Sorted in " + "-- ms");
+        startTime = System.currentTimeMillis();
+        System.out.print("Searching... " +
+                "\n              Item: " + item);
+        System.out.print("\n              Result: " + set.contains(item));
+        endTime = System.currentTimeMillis();
+        System.out.println("\n              Time: " + (endTime - startTime) + " ms");
+        total += endTime - startTime;
+
 
         System.out.println("Total time: " + (total) + " ms.\n");
     }
@@ -87,6 +104,7 @@ public class ListVsArrayVsSet {
         total += endTime - startTime;
         return endTime - startTime;
     }
+
 }
 
 
