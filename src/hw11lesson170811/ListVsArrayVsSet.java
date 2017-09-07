@@ -1,33 +1,30 @@
 package hw11lesson170811;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Random;
 import java.util.Set;
 import java.util.List;
+import java.util.Random;
 import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class ListVsArrayVsSet {
     static long total;
     static long startTime;
     static long endTime;
-
     private static int searchResult;
-        private static final int QUANTITY = 1_000_000;
+    private static final int QUANTITY = 1_000_000;
 
     private static Random r;
     private static ElementClass item;
     private static List<ElementClass> arrl;
     private static List<ElementClass> linkl;
-    private static TreeSet<ElementClass> set;
-
+    private static Set<ElementClass> set;
 
     public static void main(String[] args) {
         r = new Random(1);
         item = new ElementClass(QUANTITY, r);
-//        item.x = 1000000 - 1;
 
         linkl = new LinkedList<>();
         arrl = new ArrayList<>();
@@ -69,21 +66,18 @@ public class ListVsArrayVsSet {
         endTime = System.currentTimeMillis();
         System.out.println("\n              Time: " + (endTime - startTime) + " ms");
         total += endTime - startTime;
-
-
         System.out.println("Total time: " + (total) + " ms.\n");
     }
 
     private static long searchTimer(List<ElementClass> obj, ElementClass item) {
         startTime = System.currentTimeMillis();
-//        MyBinarySearch.binarySearch(obj, item);
         searchResult = Collections.binarySearch(obj, item);
         endTime = System.currentTimeMillis();
         total += endTime - startTime;
         return endTime - startTime;
     }
 
-    private static long sortTimer(List obj) {
+    private static long sortTimer(List<ElementClass> obj) {
 
         startTime = System.currentTimeMillis();
         Collections.sort(obj);
@@ -93,18 +87,15 @@ public class ListVsArrayVsSet {
     }
 
     private static long fillTimer(Collection<ElementClass> obj) {
-        startTime = System.currentTimeMillis();
         Random rr = new Random(1);
+        startTime = System.currentTimeMillis();
+
         for (int i = 0; i < QUANTITY; i++) {
             obj.add(new ElementClass(QUANTITY, rr));
         }
 
         endTime = System.currentTimeMillis();
-
         total += endTime - startTime;
         return endTime - startTime;
     }
-
 }
-
-
