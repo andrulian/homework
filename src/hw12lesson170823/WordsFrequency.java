@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 public class WordsFrequency {
     static Map<String, Integer> wordsFrequency = new HashMap<>();
+    static List<String> splitOnWhitespace;
     static String rawString;
 
     public static void main(String[] args) {
@@ -21,24 +22,34 @@ public class WordsFrequency {
                     " patched with flour sacks and, furled, it looked like the flag of permanent defeat.";
 
         wordsSplitter(rawString);
+        mapFiller();
+
+    }
+
+    private static void mapFiller() {
+        System.out.println("FILLER");
+//       Stream.of(splitOnWhitespace).map(x -> if (wordsFrequency.containsKey(x)))
+        for (String word : splitOnWhitespace) {
+            if (!wordsFrequency.containsKey(word)) wordsFrequency.put(word, 1);
+            else wordsFrequency.put(word, wordsFrequency.get(word) + 1);
+        }
+        System.out.println();
     }
 
     private static void wordsSplitter(String rawString) {
-
 //        Stream<String> words = Stream.of(rawString);//.map(x -> x.split("\\s+"));
-        List<String> splitOnWhitespace = Stream.of(rawString.split("\\s+")).collect(Collectors.toList());
 
+        splitOnWhitespace = Stream.of(rawString.split("\\s+")).collect(Collectors.toList());
 
-//        if (wordsFrequency.)
 
 //        Stream.of(rawString).map(x -> x.split("\\s+")).collect(Collectors.toList());
 //        Stream.of(rawString).map(x -> x.split("\\s+")).map(forEach(x -> splitOnWhitespace.add(Arrays.toString(x))));
 //        Stream.of(rawString).map(x -> x.split("\\s+")).forEach(x -> System.out.println(Arrays.toString(x)));
 //        System.out.println(Stream.of(rawString).map(x -> x.split("\\s+")));
 //        splitOnWhitespace = Stream.of(rawString).map(x -> x.split("\\s+"));//.collect(Collectors.toList());
-
-
-
+        System.out.println(splitOnWhitespace.get(0));
     }
+
+
 
 }
