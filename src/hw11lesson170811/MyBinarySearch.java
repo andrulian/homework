@@ -16,6 +16,9 @@ public class MyBinarySearch {
 
         return  -(lo + 1);
     }
+
+
+
 //few changes were applied
     public static void main(String[] args) {
         int[] arrL = new int[10];
