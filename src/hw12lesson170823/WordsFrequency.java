@@ -1,5 +1,6 @@
 package hw12lesson170823;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -7,9 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordsFrequency {
-    static Map<String, Integer> wordsFrequency = new HashMap<>();
-    static List<String> splitOnWhitespace;
-    static String rawString;
+    private static Map<String, Integer> wordsFrequency = new HashMap<>();
+    private static List<String> splitOnWhitespace;
+    private static String rawString;
 
     public static void main(String[] args) {
         rawString = "He was an old man who fished alone in a skiff in the Gulf Stream and he had gone eighty-four " +
@@ -27,12 +28,11 @@ public class WordsFrequency {
 
     }
 
-    private static void printResult() {
+    private static void printResult(){
         wordsFrequency.entrySet().forEach(System.out::println);
     }
 
     private static void wordsProcessing() {
-        System.out.println("FILLER");
         for (String word : splitOnWhitespace) {
             if (!wordsFrequency.containsKey(word)) wordsFrequency.put(word, 1);
             else wordsFrequency.put(word, wordsFrequency.get(word) + 1);

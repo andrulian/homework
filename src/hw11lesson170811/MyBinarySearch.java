@@ -11,7 +11,7 @@ public class MyBinarySearch {
 //            System.out.println("mid: " + mid);
             if (key < arr[mid]) hi = mid - 1;
             else if (key > arr[mid]) lo = mid + 1;
-            else return mid;
+            else return mid + 1;
         }
 
         return  -(lo + 1);
