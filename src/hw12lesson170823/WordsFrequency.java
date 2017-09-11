@@ -22,18 +22,22 @@ public class WordsFrequency {
                     " patched with flour sacks and, furled, it looked like the flag of permanent defeat.";
 
         wordsSplitter(rawString);
-        mapFiller();
+        wordsProcessing();
+        printResult();
 
     }
 
-    private static void mapFiller() {
+    private static void printResult() {
+        wordsFrequency.entrySet().forEach(System.out::println);
+    }
+
+    private static void wordsProcessing() {
         System.out.println("FILLER");
-//       Stream.of(splitOnWhitespace).map(x -> if (wordsFrequency.containsKey(x)))
         for (String word : splitOnWhitespace) {
             if (!wordsFrequency.containsKey(word)) wordsFrequency.put(word, 1);
             else wordsFrequency.put(word, wordsFrequency.get(word) + 1);
         }
-        System.out.println(wordsFrequency);
+//        System.out.println(wordsFrequency);
     }
 
     private static void wordsSplitter(String rawString) {
