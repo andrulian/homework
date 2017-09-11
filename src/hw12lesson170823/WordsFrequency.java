@@ -37,18 +37,15 @@ public class WordsFrequency {
             if (!wordsFrequency.containsKey(word)) wordsFrequency.put(word, 1);
             else wordsFrequency.put(word, wordsFrequency.get(word) + 1);
         }
-//        System.out.println(wordsFrequency);
     }
 
     private static void wordsSplitter(String rawString) {
-//        Stream<String> words = Stream.of(rawString);//.map(x -> x.split("\\s+"));
-
-//        splitOnWhitespace = Stream.of(rawString.split("\\s+")).collect(Collectors.toList());
 //        TODO: replace "replace"
         splitOnWhitespace = Stream.of(rawString.replace(",", " " ).replace(".", " " ).
                                       split("\\s+")).collect(Collectors.toList());
 
-
+//        Stream<String> words = Stream.of(rawString);//.map(x -> x.split("\\s+"));
+//        splitOnWhitespace = Stream.of(rawString.split("\\s+")).collect(Collectors.toList());
 //        Stream.of(rawString).map(x -> x.split("\\s+")).collect(Collectors.toList());
 //        Stream.of(rawString).map(x -> x.split("\\s+")).map(forEach(x -> splitOnWhitespace.add(Arrays.toString(x))));
 //        Stream.of(rawString).map(x -> x.split("\\s+")).forEach(x -> System.out.println(Arrays.toString(x)));
@@ -56,7 +53,4 @@ public class WordsFrequency {
 //        splitOnWhitespace = Stream.of(rawString).map(x -> x.split("\\s+"));//.collect(Collectors.toList());
         System.out.println(splitOnWhitespace.get(0));
     }
-
-
-
 }
