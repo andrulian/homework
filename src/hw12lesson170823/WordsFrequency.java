@@ -1,11 +1,8 @@
 package hw12lesson170823;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,13 +20,14 @@ public class WordsFrequency {
                     "coiled lines or the gaff and harpoon and the sail that was furled around the mast. The sail was" +
                     " patched with flour sacks and, furled, it looked like the flag of permanent defeat.";
 
-        wordsCounter(rawString);
+        wordsSplitter(rawString);
     }
 
-    private static void wordsCounter(String rawString) {
+    private static void wordsSplitter(String rawString) {
 
 //        Stream<String> words = Stream.of(rawString);//.map(x -> x.split("\\s+"));
         List<String> splitOnWhitespace = Stream.of(rawString.split("\\s+")).collect(Collectors.toList());
+
 
 //        if (wordsFrequency.)
 
